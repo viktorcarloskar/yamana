@@ -1,0 +1,58 @@
+// MIXINS 
+
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+.box-shadow(@style, @color) when (iscolor(@color)){
+  box-shadow:         @style @color;
+  -webkit-box-shadow: @style @color;
+  -moz-box-shadow:    @style @color;
+}
+.column-count(@count) {
+	-moz-column-count:@count;
+	-webkit-column-count:@count;
+	column-count:@count;
+
+	-webkit-column-break-inside:avoid;
+    -moz-column-break-inside:avoid;
+    -o-column-break-inside:avoid;
+    -ms-column-break-inside:avoid;
+    column-break-inside:avoid;
+}
+.transition (@transition) {
+	-webkit-transition: @transition;  
+	-moz-transition:    @transition;
+	-ms-transition:     @transition; 
+	-o-transition:      @transition;  
+}
+.transform (@transformation) {
+	-webkit-transform: @transformation;  
+	-moz-transform:    @transformation;
+	-ms-transform:     @transformation; 
+	-o-transform:      @transformation;  
+}
+.transform-transition (@transform, @transition) {
+	-webkit-transform: @transform;  
+	-moz-transform:    @transform;
+	-ms-transform:     @transform; 
+	-o-transform:      @transform;
+	transform: 		   @transform;
+	-webkit-transition: -webkit-transform @transition;  
+	-moz-transition:    -moz-transform @transition;
+	-ms-transition:     -ms-transform @transition; 
+	-o-transition:      -o-transform @transition;  
+	transition: 		transform @transition;
+}
+
+.no-select () {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

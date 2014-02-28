@@ -1,9 +1,19 @@
 {
-  "name": "hello-world",
-  "description": "hello world test app",
+  "name": "Yamana",
+  "description": "The Instagram viewer for spreading the word at your event",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "3.x"
+    "express": "3.x",
+    "hbs": "*",
+    "passport" : "0.2.x", 		
+    "passport-local" : "*", 	
+    "passport-facebook" : "*", 
+    "passport-twitter" : "*", 	
+    "passport-google-oauth" : "*",
+    "connect-flash": "*",
+    "instagram-node-lib": "0.1.x",
+    "pg.js": "*",
+    "orm": "*"
   }
 }
