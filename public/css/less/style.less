@@ -19,6 +19,7 @@
 @std-percentage-width: 96%;
 @std-border-radius: 3px;
 @header-height: 90px;
+@min-height: 500px;
 
 @std-font-family: "proxima_nova", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 @std-font-family-bold: "proxima_nova_bold", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
@@ -119,6 +120,7 @@ h4 {
 	max-width: 300px;
 	opacity: 0;
 	visibility:hidden;
+	z-index: 1000;
 	.transform(translate(20px, 0));
 	transition: visibility 0s 0.1s linear , opacity 0.1s ease-in, transform 0.1s ease-in;
 	-webkit-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
@@ -200,6 +202,7 @@ body {
 
 header
 {
+	z-index: 1000;
 	width: 100%;
 	position: absolute; 
 	top: 0;
@@ -219,14 +222,15 @@ header
 	#menu {
 		float: right;
 		height: 100%;
-		ul {
+		> ul {
 			height: 100%;
-			li {
+			> li {
 				float: left;
 				height: 100%;
 				padding-left: 20px;
 				padding-right: 20px;
 				border-left: 1px solid @color-darker-blue-div;
+				background-color: @color-blue-div;
 				font-size: 1.4rem;
 				color: @color-white;
 				letter-spacing: 1.3px;
@@ -235,17 +239,77 @@ header
 					color: @color-white;
 					text-decoration: none;
 				}
+				-webkit-transition: background 200ms ease-in;
+				-moz-transition: background 200ms ease-in;
+				-ms-transition: background 200ms ease-in;
+				-o-transition: background 200ms ease-in;
+				transition: background 200ms ease-in;
 			}
-			li:last-child {
+			> li:last-child {
 				border-right: 1px solid @color-darker-blue-div;	
 			}
+			> li:hover {
+				background-color: @color-darker-blue-div;
+			}
+			i {
+				margin-left: 14px;
+				font-size: 1.3rem;
+			}
+		}
+	}
+	#menu-user {
+		position: relative;
+		#user-menu {
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 100%;
+			background: @color-darker-blue-div;
+			width: 100%;
+			li {
+				width: 100%;
+				height: @header-height;
+				border-top: 1px solid @color-blue-div;
+				a {
+					height: 100%;
+					width: 100%;
+				}
+				span {
+					text-align: left;
+					padding-left: 20px;
+					padding-right: 20px;
+					i {
+						float: right;
+					}
+				}
+			}
+			transform: translate(0, -200%);
+			-webkit-transform: translate(0, -200%);
+			-moz-transform: translate(0, -200%);
+			-o-transform: translate(0, -200%);
+			-ms-transform: translate(0, -200%);
+		}
+	}
+	#menu-user.active {
+		background-color: @color-darker-blue-div;
+		#user-menu {
+			transform: translate(0, 0);
+			-webkit-transform: translate(0, 0);
+			-moz-transform: translate(0, 0);
+			-o-transform: translate(0, 0);
+			-ms-transform: translate(0, 0);
 		}
 	}
 }
 
 #content {
 	margin-top: @header-height;
-	min-height: 500px;
+	min-height: @min-height;
+	background: url(../img/bg-1.png) no-repeat center center; 
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	     -o-background-size: cover;
+	        background-size: cover;
 }
 
 
@@ -256,18 +320,87 @@ footer {
 	background-color: @color-blue-div;
 }
 
+/* ========================================================
+   HOMEPAGE
+*/
 
+#home {
+    position: relative;
+    overflow: hidden;
+    padding-top: 5%;
+    .left {
+    	float: left;
+    	background-color: rgba(255, 255, 0, 0.2);
+    }
+    .right {
+    	float: left;
+    	background-color: rgba(255, 0, 0, 0.2);
+    }
+    .one {
+    	overflow: hidden;
+    	.left {
+    		width: 40%;
+    	}
+    	.right {
+    		width: 60%;
+    	}
+    }
+
+}
+
+/* ========================================================
+   LOGIN PAGE
+*/
+#login {
+	padding-top: 30px;
+	min-height: @min-height;
+	#login-form-page {
+		padding-top: 30px;
+		padding-bottom: 30px;
+		width: 400px;
+		color: @color-white;
+		margin-left: auto;
+		margin-right: auto;
+		form > p {
+			margin-top: 10px;
+		}
+		form > p:first-child {
+			margin-top: 0px;
+		}
+		.vg-input-wrapper {
+			position: relative;
+		}
+		.vg-tb {
+			.vg-textbox(100%);
+			padding-left: 40px;
+		}
+		.vg-input-email-wrapper:before {
+			font-family: 'FontAwesome';
+		    color:@color-placeholder;
+		    position: absolute;
+		    top: 21px;
+		    left: 14px;
+		    content: "";
+		}
+		.vg-input-password-wrapper:before {
+			font-family: 'FontAwesome';
+		    color:@color-placeholder;
+		    position: absolute;
+		    top: 21px;
+		    left: 14px;
+		    content: "";
+		}
+		.vg-btn-green {
+			.vg-btn(@color-confirm-green, @color-white);
+		}
+	}
+}
 
 /* ========================================================
    SIGNUP PAGE
 */
 
 #signup {
-	background: url(../img/bg-1.png) no-repeat center center; 
-	-webkit-background-size: cover;
-	   -moz-background-size: cover;
-	     -o-background-size: cover;
-	        background-size: cover;
 	#signup-form {
 		padding-top: 30px;
 		padding-bottom: 30px;

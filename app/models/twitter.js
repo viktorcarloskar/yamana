@@ -18,3 +18,7 @@ module.exports = function(orm, db) {
         }
     });
 }
+
+/*
+CREATE TABLE twitter (id SERIAL PRIMARY KEY, token varchar(255) NOT NULL, displayname varchar(255) NOT NULL, username varchar(30) NOT NULL, user_id integer references users(id));
+*/

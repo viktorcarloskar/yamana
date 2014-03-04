@@ -20,5 +20,5 @@ module.exports = function(orm, db) {
 }
 
 /*
-CREATE TABLE twitter (id SERIAL PRIMARY KEY, token varchar(255) NOT NULL, email varchar(255) NOT NULL, name varchar(30) NOT NULL, user_id integer references users(id));
+CREATE TABLE facebook (id SERIAL PRIMARY KEY, token varchar(255) NOT NULL, email varchar(255) NOT NULL, name varchar(30) NOT NULL, user_id integer references users(id));
 */

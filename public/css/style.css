@@ -64,6 +64,7 @@ h4 {
   max-width: 300px;
   opacity: 0;
   visibility: hidden;
+  z-index: 1000;
   -webkit-transform: translate(20px, 0);
   -moz-transform: translate(20px, 0);
   -ms-transform: translate(20px, 0);
@@ -192,6 +193,7 @@ body {
   text-align: center;
 }
 header {
+  z-index: 1000;
   width: 100%;
   position: absolute;
   top: 0;
@@ -218,30 +220,91 @@ header #menu {
   float: right;
   height: 100%;
 }
-header #menu ul {
+header #menu > ul {
   height: 100%;
 }
-header #menu ul li {
+header #menu > ul > li {
   float: left;
   height: 100%;
   padding-left: 20px;
   padding-right: 20px;
   border-left: 1px solid #2c3035;
+  background-color: #2f3439;
   font-size: 1.4rem;
   color: #fafafa;
   letter-spacing: 1.3px;
+  -webkit-transition: background 200ms ease-in;
+  -moz-transition: background 200ms ease-in;
+  -ms-transition: background 200ms ease-in;
+  -o-transition: background 200ms ease-in;
+  transition: background 200ms ease-in;
 }
-header #menu ul li a {
+header #menu > ul > li a {
   cursor: pointer;
   color: #fafafa;
   text-decoration: none;
 }
-header #menu ul li:last-child {
+header #menu > ul > li:last-child {
   border-right: 1px solid #2c3035;
+}
+header #menu > ul > li:hover {
+  background-color: #2c3035;
+}
+header #menu > ul i {
+  margin-left: 14px;
+  font-size: 1.3rem;
+}
+header #menu-user {
+  position: relative;
+}
+header #menu-user #user-menu {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #2c3035;
+  width: 100%;
+  transform: translate(0, -200%);
+  -webkit-transform: translate(0, -200%);
+  -moz-transform: translate(0, -200%);
+  -o-transform: translate(0, -200%);
+  -ms-transform: translate(0, -200%);
+}
+header #menu-user #user-menu li {
+  width: 100%;
+  height: 90px;
+  border-top: 1px solid #2f3439;
+}
+header #menu-user #user-menu li a {
+  height: 100%;
+  width: 100%;
+}
+header #menu-user #user-menu li span {
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+header #menu-user #user-menu li span i {
+  float: right;
+}
+header #menu-user.active {
+  background-color: #2c3035;
+}
+header #menu-user.active #user-menu {
+  transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
 }
 #content {
   margin-top: 90px;
   min-height: 500px;
+  background: url(../img/bg-1.png) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 footer {
   width: 100%;
@@ -250,15 +313,113 @@ footer {
   background-color: #2f3439;
 }
 /* ========================================================
+   HOMEPAGE
+*/
+#home {
+  position: relative;
+  overflow: hidden;
+  padding-top: 5%;
+}
+#home .left {
+  float: left;
+  background-color: rgba(255, 255, 0, 0.2);
+}
+#home .right {
+  float: left;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+#home .one {
+  overflow: hidden;
+}
+#home .one .left {
+  width: 40%;
+}
+#home .one .right {
+  width: 60%;
+}
+/* ========================================================
+   LOGIN PAGE
+*/
+#login {
+  padding-top: 30px;
+  min-height: 500px;
+}
+#login #login-form-page {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 400px;
+  color: #fafafa;
+  margin-left: auto;
+  margin-right: auto;
+}
+#login #login-form-page form > p {
+  margin-top: 10px;
+}
+#login #login-form-page form > p:first-child {
+  margin-top: 0px;
+}
+#login #login-form-page .vg-input-wrapper {
+  position: relative;
+}
+#login #login-form-page .vg-tb {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 14px;
+  font-size: 1.2rem;
+  width: 100%;
+  border: 1px solid #2d2d2d;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  padding-left: 40px;
+}
+#login #login-form-page .vg-input-email-wrapper:before {
+  font-family: 'FontAwesome';
+  color: #5f5f5f;
+  position: absolute;
+  top: 21px;
+  left: 14px;
+  content: "";
+}
+#login #login-form-page .vg-input-password-wrapper:before {
+  font-family: 'FontAwesome';
+  color: #5f5f5f;
+  position: absolute;
+  top: 21px;
+  left: 14px;
+  content: "";
+}
+#login #login-form-page .vg-btn-green {
+  text-align: center;
+  height: auto;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 14px;
+  background-color: #59a553;
+  color: #fafafa;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: block;
+  border: 0px solid white;
+  box-sizing: border-box;
+  width: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* ========================================================
    SIGNUP PAGE
 */
-#signup {
-  background: url(../img/bg-1.png) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 #signup #signup-form {
   padding-top: 30px;
   padding-bottom: 30px;

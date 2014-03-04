@@ -6,24 +6,26 @@ module.exports = function(app, passport) {
 	// =================================
 	// HOMEPAGE
 	// =================================
-	app.all('/', function(req, res) {
-		res.render('home', {title: 'YAMANA - Instagram visualizer for the big screen'});
+	app.all('/', isLoggedIn, function(req, res) {
+		renderHome(res, '');
 	})
 
 	// =================================
 	// LOGIN PAGE
 	// =================================
 	app.get('/login', function(req, res) {
-		//res.render('home', {title: 'YAMANA - Instagram visualizer for the big screen'});
-		res.send('LOGIN');
+		res.locals.message = req.flash('loginMessage')
+		res.render('login', {title: 'YAMANA - Instagram visualizer for the big screen'});
 	})
 
 	// =================================
 	// LOGIN POST
 	// =================================
-	app.post('/login', function(req, res) {
-		res.render('home', {title: 'YAMANA - Instagram visualizer for the big screen'});
-	})
+	app.post('/login', passport.authenticate('local-login', {
+		successRedirect : '/dashboard', // redirect to the secure profile section
+		failureRedirect : '/login', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
 
 	// =================================
 	// SIGNUP PAGE
@@ -55,15 +57,16 @@ module.exports = function(app, passport) {
 	// DASHBOARD
 	// =================================
 	app.get('/dashboard', isLoggedIn, function(req, res) {
-		res.render('dashboard', {})
+		res.render('dashboard', {title: 'YAMANA - Dashboard'});
 	});
 	// =================================
 	// SETTINGS
 	// =================================
 
 	// =================================
-	// WATCHER PAGE
+	// VIEWER PAGE
 	// =================================
+	app.get('/viewer', controllers.viewer.userViewers);
 
 	// =================================
 	// WATCHER POST
@@ -72,6 +75,28 @@ module.exports = function(app, passport) {
 	// =================================
 	// VIEWER
 	// =================================
+
+	// =================================
+	// AUTH INSTAGRAM
+	// =================================
+	app.get('/auth/instagram', function(req, res) {
+		res.send('Suceess');
+	});
+	// =================================
+	// CALLBACK INSTAGRAM
+	// =================================
+	app.get('/callback/instagram', function(req, res) {
+		res.send('Suceess');
+	});
+	// =================================
+	// CALLBACK INSTAGRAM
+	// =================================
+	app.post('/callback/instagram', function(req, res) {
+		if(req.param("hub.challenge") != null)
+    		res.send(request.param("hub.challenge"));
+    	else 
+    		console.log("ERROR on suscription request");
+	});
 
 	// =================================
 	// AUTH GOOGLE
@@ -100,7 +125,7 @@ module.exports = function(app, passport) {
 
 	});
 
-	app.get('/create', function(req, res) {
+	app.get('/create', isLoggedIn, function(req, res) {
 
 		res.send()
 	})
@@ -108,11 +133,25 @@ module.exports = function(app, passport) {
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
 	// if user is authenticated in the session, carry on 
-	if (req.isAuthenticated())
+	if (req.isAuthenticated()) {
+		res.locals = {
+			loggedIn: true,
+			name: req.user.full_name
+		}
 		return next();
-
-	// if they aren't redirect them to the home page
-	res.redirect('/');
+	}
+	else {
+		// if they aren't redirect them to the home page
+		res.locals = {
+				loggedIn: false
+			}
+		if(req.route.path != '/')
+			res.redirect('/');
+		else
+			renderHome(res, '');
+	}	
+}
+function renderHome(res, msg) {
+	res.render('home', {title: 'YAMANA - Instagram visualizer for the big screen'});
 }

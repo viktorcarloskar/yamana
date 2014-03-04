@@ -4,14 +4,10 @@ var settings = require("../../config/settings.js");
 
 
 module.exports = function(orm, db) {
-	var user = db.define("users", {
-        id        : String,
-        full_name : String,
-        email     : String,
-        salt      : String,
-        password  : String,
-        active    : Boolean,
-        last_seen : Date 
+	var viewer = db.define("viewers", {
+        hashtag     : String,
+        created     : Date,
+        last_opened : Date 
     }, 
     {
         methods: {

@@ -14,6 +14,35 @@
 					<a href="/" title="The homepage"><img src="/img/logo.png" alt="YAMANA Logotype"></a>
 				</span>
 			</div>
+			{{#if loggedIn}}
+			<div id="menu">
+				<ul id="menu-list">
+					<li class="vertical-center-area">
+						<span class="vertical-center-object">
+							<a href="/about" title="About the application">
+								About
+							</a>
+						</span>
+					</li>
+					<li class="vertical-center-area"><span class="vertical-center-object"><a href="/dashboard" title="Sign up for a new user">Dashboard</a></span></li>
+					<li class="vertical-center-area" id="menu-user"><span class="vertical-center-object">
+						<a title="Menu for user {{name}}">{{name}}<i class="fa fa-bars"></i></a></span>
+						<ul id="user-menu">
+							<li>
+								<a class="vertical-center-area" href="/settings" title="Settings for {{name}}">
+									<span class="vertical-center-object">Settings<i class="fa fa-cog"></i></span>
+								</a>
+							</li>
+							<li>
+								<a class="vertical-center-area" href="/logout" title="Log out {{name}}">
+									<span class="vertical-center-object">Log out<i class="fa fa-sign-out"></i></span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			{{else}}
 			<div id="menu">
 				<ul id="menu-list">
 					<li class="vertical-center-area"><span class="vertical-center-object"><a href="/about" title="About the application">About</a></span></li>
@@ -21,11 +50,13 @@
 					<li class="vertical-center-area" id="menu-login"><span class="vertical-center-object"><a title="Log in with existing user">Log in</a></span></li>
 				</ul>
 			</div>	
+			{{/if}}
+			
 			<div id="login-form">
 				<div class="vg-popup">
 					<form action="/login" method="post" accept-charset="utf-8">
-						<input class="vg-tb" type="text" name="login-username" value="" placeholder="Username">
-						<input class="vg-tb" type="password" name="login-password" value="" placeholder="Password">
+						<input class="vg-tb" type="text" name="login[email]" value="" placeholder="Email">
+						<input class="vg-tb" type="password" name="login[password]" value="" placeholder="Password">
 						<input type="submit" class="vg-btn vg-btn-green" name="" value="Log in">
 					</form>
 				</div>
@@ -33,7 +64,6 @@
 		</div>
 	</header>
 	<div id="content">
-		
 		{{{body}}}
 	
 		</div>
