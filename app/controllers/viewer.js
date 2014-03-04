@@ -5,7 +5,7 @@ instagram.set('client_secret', '62d8bf1ba7f14e24891eb1a89cff25eb');
 
 module.exports = {
 	userViewers: function(req, res, next) {
-		getRecent('idaginatt');
+		console.log(getRecent('idaginatt'));
 		res.send('hello');
 	},
 	startSubscription: function(req, res, next) {

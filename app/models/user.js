@@ -5,7 +5,6 @@ var settings = require("../../config/settings.js");
 
 module.exports = function(orm, db) {
 	var user = db.define("users", {
-        id        : String,
         full_name : String,
         email     : String,
         salt      : String,
