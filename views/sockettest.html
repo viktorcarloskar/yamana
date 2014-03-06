@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://127.0.0.1/socket.io/socket.io.js"></script>
+  <script>
+  var main = document.getElementById('main');
+  var socket = io.connect('127.0.0.1');
+  socket.on('conn', function (data) {
+    socket.emit('fetch', {token: data.token});
+  });
+  socket.on('instagram', function (data) {
+    console.log(data);
+    data.forEach(function(image) {
+      main.innerHtml = newImage(image) + main.innerHtml;
+    })
+  });
+  function newImage(image) {
+    var html = '<img class="image" src="' + image.images.standard_resolution.url + '">'
+    return html;
+  }
+  </script>
+</head>
+<body>
+  <div id="main">
+
+  </div>
+</body>
+</html>

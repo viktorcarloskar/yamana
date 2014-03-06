@@ -7,25 +7,19 @@ module.exports = function(orm, db) {
 	var viewer = db.define("viewers", {
         hashtag     : String,
         created     : Date,
-        last_opened : Date 
+        last_opened : Date,
+        token       : String,
+        user_id     : String
     }, 
     {
         methods: {
-            fullName: function () {
-                return this.full_name;
-            },
-            validPassword: function(password, next) {
-                var userPass = this.password.toString('hex');
-                var userSalt = this.salt;
-                crypto.pbkdf2(password, userSalt, settings.crypt.iterations, settings.crypt.keylen, function(err, key) {
-                    if(err) throw err;
-                    if (userPass == key.toString('hex')) {
-                        next(true);
-                    }
-                    else {
-                        next(false);
-                    }
-                });
+            user: function () {
+                db.models.users.get(this.user_id, function(err, user) {
+                    if (err) 
+                        throw err;
+                    else
+                        return user;
+                })
             }
         },
         validations: {
@@ -35,6 +29,6 @@ module.exports = function(orm, db) {
 }
 
 /*
-CREATE TABLE users (id SERIAL PRIMARY KEY, username varchar(30) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL, active boolean NULL, created timestamp NOT NULL, last_seen timestamp NULL);
+CREATE TABLE viewers (id SERIAL PRIMARY KEY, hashtag varchar(255) NOT NULL, created timestamp NOT NULL default CURRENT_TIMESTAMP, last_opnened timestamp, token varchar(255), user_id integer NOT NULL, CONSTRAINT viewer_user_id_fkey FOREIGN KEY user_id REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE);
 INSERT INTO films (username, email, password, date_prod, kind) VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');
 */

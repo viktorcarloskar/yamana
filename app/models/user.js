@@ -33,6 +33,11 @@ module.exports = function(orm, db) {
         },
         validations: {
             //age: orm.enforce.ranges.number(18, undefined, "under-age")
+        },
+        hooks: {
+            beforeSave: function() {
+                this.email = this.email.toLowerCase();
+            }
         }
     });
 }

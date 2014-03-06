@@ -1,7 +1,7 @@
 // app/routes.js
 var controllers = require('./controllers');
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, server, io) {
 
 	// =================================
 	// HOMEPAGE
@@ -41,7 +41,7 @@ module.exports = function(app, passport) {
 	app.get('/signup/twitter'  , controllers.signup.registerTwitter);
 
 	// =================================
-	// LOGOUT 
+	// LOGOUT
 	// =================================
 	app.get('/logout', function(req, res) {
 		req.logout();
@@ -56,24 +56,9 @@ module.exports = function(app, passport) {
 	// =================================
 	// DASHBOARD
 	// =================================
-	app.get('/dashboard', isLoggedIn, function(req, res) {
-		res.render('dashboard', {title: 'YAMANA - Dashboard'});
-	});
+	app.get('/dashboard', isLoggedIn, controllers.viewer.userViewers);
 	// =================================
 	// SETTINGS
-	// =================================
-
-	// =================================
-	// VIEWER PAGE
-	// =================================
-	app.get('/viewer', controllers.viewer.userViewers);
-
-	// =================================
-	// WATCHER POST
-	// =================================
-
-	// =================================
-	// VIEWER
 	// =================================
 
 	// =================================
@@ -94,7 +79,7 @@ module.exports = function(app, passport) {
 	app.post('/callback/instagram', function(req, res) {
 		if(req.param("hub.challenge") != null)
     		res.send(request.param("hub.challenge"));
-    	else 
+    	else
     		console.log("ERROR on suscription request");
 	});
 
@@ -129,11 +114,35 @@ module.exports = function(app, passport) {
 
 		res.send()
 	})
+
+
+
+	// =================================
+	// VIEWER PAGE
+	// =================================
+	app.get('/viewer/:id', isLoggedIn, controllers.viewer.getViewer);
+
+	// ==================================
+	// SOCKETS.IO
+	// ==================================
+	io.sockets.on('connection', function (socket) {
+		if (controllers.viewer.newConn(socket)) {
+			socket.emit('conn', controllers.viewer.newConn);
+  		socket.on('fetch', function(data) {
+				controllers.viewer.init(socket, data);
+			});
+			socket.on('disconnect', function() {
+				controllers.viewer.closedConn(socket);
+			});
+		}
+		else
+			socket.disconnect();
+	});
 }
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-	// if user is authenticated in the session, carry on 
+	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated()) {
 		res.locals = {
 			loggedIn: true,
@@ -150,7 +159,7 @@ function isLoggedIn(req, res, next) {
 			res.redirect('/');
 		else
 			renderHome(res, '');
-	}	
+	}
 }
 function renderHome(res, msg) {
 	res.render('home', {title: 'YAMANA - Instagram visualizer for the big screen'});
