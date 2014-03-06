@@ -56,6 +56,7 @@ app.configure(function() {
 	    }
 	    accept(null, true);
 	});
+  io.set('log_level', 1);
 
 	// HTML render engine
 	app.set('view engine', 'html');

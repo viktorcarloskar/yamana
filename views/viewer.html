@@ -10,7 +10,7 @@
 	});
 	socket.on('instagram', function (data) {
 		var main = document.getElementById('main');
-		console.log(data);
+		console.log(data); 
 		data.forEach(function(image) {
 			main.innerHTML = newImage(image) + main.innerHTML;
 		})
