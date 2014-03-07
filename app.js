@@ -56,7 +56,7 @@ app.configure(function() {
 	    }
 	    accept(null, true);
 	});
-  io.set('log level', 0); 
+  io.set('log level', 0);
 
 	// HTML render engine
 	app.set('view engine', 'html');
@@ -65,6 +65,8 @@ app.configure(function() {
 	// Views dir and public dir
 	app.set('views', __dirname + '/views');
 	app.use(express.static(__dirname + '/public'));
+
+  
 });
 
 //console.log(answ);

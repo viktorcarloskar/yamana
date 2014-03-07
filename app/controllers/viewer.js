@@ -7,7 +7,7 @@ var Hashids   = require('hashids'),
 
 ig.set('client_id', settings.instagram.client_id);
 ig.set('client_secret', settings.instagram.client_secret);
-ig.set('callback_url', settings.instagram.callbacku_url);
+ig.set('callback_url', settings.instagram.callback_url);
 ig.set('maxSockets', 10);
 
 var clients = [];
