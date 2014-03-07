@@ -80,6 +80,7 @@ module.exports = {
 		//The raw data from instagram
 		var data = req.body;
 		console.log(data);
+		console.log(data.data);
 
 		// Async fix variables
 		var tasksToGo = clients.length;
@@ -90,7 +91,7 @@ module.exports = {
 			callback(viewers);
 		clients.forEach(function(client) {
 				if (client.id == data.id) {
-					client.emit('instagram', data);
+					client.emit('instagram', data.data);
 					sentData = true;
 				}
 				if (--tasksToGo === 0 && !sentData) {
