@@ -15,7 +15,7 @@
 		console.log(data);
 
 		var sorted = data.sort(function(a, b){
-        return parseInt(b.id) - parseInt(a.id);
+        return parseInt(b.created_time) - parseInt(a.created_time);
     });
 
 		sorted.forEach(function(image) {
