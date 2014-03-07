@@ -62,7 +62,7 @@ module.exports = {
 									if (images.length > 0) {
 											// Find socket and set min id to get next time
 											clients.forEach(function(client) {
-												if (clients.socket.id == socket.id) {
+												if (client.socket.id == socket.id) {
 													setMinId(client, pagination);
 												}
 											})
