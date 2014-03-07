@@ -15,12 +15,12 @@
 		console.log(data);
 
 		var sorted = data.sort(function(a, b){
-        return parseInt(b.id) - parseInt(a.id);
+        return parseInt(a.id) - parseInt(b.id);
     });
 
 		sorted.forEach(function(image) {
 			console.log(image);
-			main.innerHTML = main.innerHTML + newImage(image);
+			main.innerHTML = newImage(image) + main.innerHTML;
 		})
 
 	});
