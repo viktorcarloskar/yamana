@@ -95,7 +95,7 @@ module.exports = {
 					console.log(tag);
 					console.log(client);
 					if (client.socket.id == socketId) {
-						getRecent(tag.object_id, socket.min_id, function(images) {
+						getRecent(tag.object_id, client.socket.min_id, function(images) {
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
 						})
