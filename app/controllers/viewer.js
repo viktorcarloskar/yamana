@@ -59,12 +59,14 @@ module.exports = {
 								getRecent(viewer.hashtag, null, function(images, pagination) {
 									socket.emit('instagram', images);
 
-									// Find socket and set min id to get next time
-									clients.forEach(function(client) {
-										if (clients.socket.id == socket.id) {
-											setMinId(client, pagination);
-										}
-									})
+									if (images.length > 0) {
+											// Find socket and set min id to get next time
+											clients.forEach(function(client) {
+												if (clients.socket.id == socket.id) {
+													setMinId(client, pagination);
+												}
+											})
+									}
 								})
 
 								//Starts instagram subscription
@@ -97,8 +99,11 @@ module.exports = {
 					if (client.socket.id == socketId) {
 						console.log('Min_id: %s', client.min_id);
 						getRecent(tag.object_id, client.min_id, function(images, pagination) {
-							client.socket.emit('instagram', images);
-							setMinId(client, pagination);
+							if (images.length > 0) {
+									// Find socket and set min id to get next time
+									client.socket.emit('instagram', images);
+									setMinId(client, pagination);
+							}
 						})
 						sentData = true;
 					}
