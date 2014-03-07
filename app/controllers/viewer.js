@@ -90,9 +90,10 @@ module.exports = {
 			if (tasksToGo === 0)
 				callback(viewers);
 				clients.forEach(function(client) {
+					console.log(tag);
+					console.log(client);
 					if (client.socket.id == tag.verify_token) {
 						getRecent(tag.object_id, socket.min_id, function(images) {
-
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
 						})
