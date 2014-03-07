@@ -85,6 +85,8 @@ module.exports = {
 		var data = req.body;
 		var socketId = req.params.id;
 
+		console.log('CLIENTS: %s', clients);
+
 		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
