@@ -125,7 +125,7 @@ module.exports = {
 
 function getRecent(tagName, min_id, next) {
 	if (min_id) {
-			ig.tags.recent({name: tagName, min_id: min_id, complete: function(data, pagination) {
+			ig.tags.recent({name: tagName, min_tag_id: min_id, complete: function(data, pagination) {
 				next(data);
 			}});
 	}
