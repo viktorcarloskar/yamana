@@ -96,6 +96,7 @@ module.exports = {
 				callback(viewers);
 				clients.forEach(function(client) {
 					if (client.socket.id == socketId) {
+						console.log(client.socket.min_id);
 						getRecent(tag.object_id, client.socket.min_id, function(images) {
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
@@ -124,7 +125,7 @@ module.exports = {
 
 function getRecent(tagName, min_id, next) {
 	if (min_id) {
-			ig.tags.recent({name: tagName, MIN_ID: min_id, complete: function(data, pagination) {
+			ig.tags.recent({name: tagName, min_id: min_id, complete: function(data, pagination) {
 				next(data);
 			}});
 	}
