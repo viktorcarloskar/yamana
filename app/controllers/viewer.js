@@ -134,7 +134,7 @@ function getRecent(tagName, min_id, next) {
 			}});
 	}
 }
-function setMinID(client, data){
+function setMinId(client, data){
     var sorted = data.sort(function(a, b){
         return parseInt(b.id) - parseInt(a.id);
     });
