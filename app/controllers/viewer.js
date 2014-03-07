@@ -61,7 +61,7 @@ module.exports = {
 								})
 								//Starts instagram subscription
 								console.log('Subscribe postback %s', (settings.instagram.callback_url + '/' + socket.id));
-								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id)});
+								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id + '/')});
 						});
 				});
 		}
