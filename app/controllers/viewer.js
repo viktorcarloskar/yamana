@@ -72,6 +72,7 @@ module.exports = {
 
 	// Function that responds to instagrams handshake method for verification
 	igHandshake: function(req, res) {
+		console.log(req.body);
 		ig.subscriptions.handshake(req, res);
 	},
 
