@@ -60,7 +60,7 @@ module.exports = {
 									socket.emit('instagram', images);
 								})
 								//Starts instagram subscription
-								ig.tags.subscribe({ object_id: viewer.hashtag, verify_token: socket.id});
+								ig.tags.subscribe({ object_id: viewer.hashtag, 'verify_token': socket.id});
 						});
 				});
 		}
