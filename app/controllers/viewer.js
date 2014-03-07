@@ -44,7 +44,7 @@ module.exports = {
 		})
 	},
 	newConn: function(socket) {
-		clients.push({socket: socket, min_id: ''});
+		clients.push({socket: socket, min_id: null});
 		return true;
 	},
 	init: function(socket, data) {
@@ -96,7 +96,7 @@ module.exports = {
 				callback(viewers);
 				clients.forEach(function(client) {
 					if (client.socket.id == socketId) {
-						console.log(client.socket.min_id);
+						console.log('Min_id: %s', client.socket.min_id);
 						getRecent(tag.object_id, client.socket.min_id, function(images) {
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
@@ -135,9 +135,6 @@ function getRecent(tagName, min_id, next) {
 			}});
 	}
 }
-function getMinID(geoName, callback){
-
-}
 function setMinID(socket, data){
     var sorted = data.sort(function(a, b){
         return parseInt(b.id) - parseInt(a.id);
@@ -150,9 +147,6 @@ function setMinID(socket, data){
         console.log('Error parsing min ID');
         console.log(sorted);
     }
-}
-function sendUrl(tagName) {
-	return 'https://api.instagram.com/v1/tags/' + tagName + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
 }
 function addImages(viewers, callback) {
 	var jsonViewers = {viewers: []};
