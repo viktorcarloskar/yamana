@@ -67,21 +67,6 @@ module.exports = function(app, passport, server, io) {
 	app.get('/auth/instagram', function(req, res) {
 		res.send('Suceess');
 	});
-	// =================================
-	// CALLBACK INSTAGRAM
-	// =================================
-	app.get('/callback/instagram', function(req, res) {
-		res.send('Suceess');
-	});
-	// =================================
-	// CALLBACK INSTAGRAM
-	// =================================
-	app.post('/callback/instagram', function(req, res) {
-		if(req.param("hub.challenge") != null)
-    		res.send(request.param("hub.challenge"));
-    	else
-    		console.log("ERROR on suscription request");
-	});
 
 	// =================================
 	// AUTH GOOGLE
@@ -115,7 +100,15 @@ module.exports = function(app, passport, server, io) {
 		res.send()
 	})
 
+	// =================================
+	// CALLBACK INSTAGRAM
+	// =================================
+	app.get('/callback/instagram', controllers.viewer.igHandshake);
 
+	// =================================
+	// CALLBACK INSTAGRAM
+	// =================================
+	app.post('/callback/instagram', controllers.viewer.igPost);
 
 	// =================================
 	// VIEWER PAGE
@@ -123,7 +116,7 @@ module.exports = function(app, passport, server, io) {
 	app.get('/viewer/:id', isLoggedIn, controllers.viewer.getViewer);
 
 	// ==================================
-	// SOCKETS.IO
+	// SOCKET.IO
 	// ==================================
 	io.sockets.on('connection', function (socket) {
 		if (controllers.viewer.newConn(socket)) {

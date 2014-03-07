@@ -7,6 +7,8 @@ var Hashids   = require('hashids'),
 
 ig.set('client_id', settings.instagram.client_id);
 ig.set('client_secret', settings.instagram.client_secret);
+ig.set('callback_url', settings.instagram.callbacku_url);
+ig.set('maxSockets', 10);
 
 var clients = [];
 
@@ -57,13 +59,21 @@ module.exports = {
 								getRecent(viewer.hashtag, 10, function(data) {
 									socket.emit('instagram', data);
 								});
+								//Starts instagram subscription
+								ig.tags.subscribe({ object_id: viewer.hashtag, id: socket.id});
 						});
 				});
 		}
-		//Start subscription
+
 		console.log('Data from fetch');
 		console.log(data);
 		console.log(clients.length)
+	},
+	igHandshake: function(req, res) {
+		ig.subscriptions.handshake(req, res);
+	},
+	igPost: function(req, res) {
+		console.log(req);
 	},
 	closedConn: function(socket) {
 		var index = clients.indexOf(socket);
