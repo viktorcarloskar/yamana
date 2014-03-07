@@ -56,13 +56,13 @@ module.exports = {
 						if (err) return next(err);
 
 						db.models.viewers.get(viewerId, function(err, viewer) {
-								getRecent(viewer.hashtag, null, function(images) {
+								getRecent(viewer.hashtag, null, function(images, pagination) {
 									socket.emit('instagram', images);
 
 									// Find socket and set min id to get next time
 									clients.forEach(function(client) {
 										if (clients.socket.id == socket.id) {
-											setMinId(client, images);
+											setMinId(client, pagination);
 										}
 									})
 								})
@@ -85,8 +85,6 @@ module.exports = {
 		var data = req.body;
 		var socketId = req.params.id;
 
-		console.log('CLIENTS: %s', clients);
-
 		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
@@ -98,9 +96,9 @@ module.exports = {
 				clients.forEach(function(client) {
 					if (client.socket.id == socketId) {
 						console.log('Min_id: %s', client.min_id);
-						getRecent(tag.object_id, client.min_id, function(images) {
+						getRecent(tag.object_id, client.min_id, function(images, pagination) {
 							client.socket.emit('instagram', images);
-							setMinId(client, images);
+							setMinId(client, pagination);
 						})
 						sentData = true;
 					}
@@ -127,28 +125,17 @@ module.exports = {
 function getRecent(tagName, min_id, next) {
 	if (min_id) {
 			ig.tags.recent({name: tagName, min_tag_id: min_id, complete: function(data, pagination) {
-				next(data);
+				next(data, pagination);
 			}});
 	}
 	else {
 			ig.tags.recent({name: tagName, complete: function(data, pagination) {
-				next(data);
+				next(data, pagination);
 			}});
 	}
 }
 function setMinId(client, data){
-    var sorted = data.sort(function(a, b){
-        return parseInt(b.id) - parseInt(a.id);
-    });
-    var nextMinID;
-    try {
-				console.log('Sorted id: %s', sorted[0].id);
-        nextMinID = parseInt(sorted[0].id);
-				client.min_id = nextMinID;
-    } catch (e) {
-        console.log('Error parsing min ID');
-        console.log(sorted);
-    }
+		client.min_id = data.min_tag_id;
 }
 function addImages(viewers, callback) {
 	var jsonViewers = {viewers: []};
