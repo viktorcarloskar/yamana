@@ -82,7 +82,6 @@ module.exports = {
 	// Function that handles the data from instagram
 	igPost: function(req, res) {
 		//The raw data from instagram
-
 		var data = req.body;
 		var socketId = req.params.id;
 
@@ -135,14 +134,15 @@ function getRecent(tagName, min_id, next) {
 			}});
 	}
 }
-function setMinID(socket, data){
+function setMinID(client, data){
     var sorted = data.sort(function(a, b){
         return parseInt(b.id) - parseInt(a.id);
     });
     var nextMinID;
     try {
+				console.log('Sorted id: %s', sorted[0].id);
         nextMinID = parseInt(sorted[0].id);
-				socket.min_id = nextMinID;
+				client.min_id = nextMinID;
     } catch (e) {
         console.log('Error parsing min ID');
         console.log(sorted);
