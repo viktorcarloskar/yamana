@@ -78,11 +78,10 @@ module.exports = {
 	// Function that handles the data from instagram
 	igPost: function(req, res) {
 		//The raw data from instagram
-		if (req.body.length > 0) {
-			var data = req.body[0];
-			console.log(data);
-			console.log(data.data);
 
+		var data = req.body;
+
+		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
 			var sentData = false;
@@ -91,15 +90,15 @@ module.exports = {
 			if (tasksToGo === 0)
 				callback(viewers);
 			clients.forEach(function(client) {
-					if (client.id == data.id) {
-						client.emit('instagram', data.data);
+					//if (client.id ==  {
+						client.emit('instagram', sendUrl(tag.object_id));
 						sentData = true;
-					}
-					if (--tasksToGo === 0 && !sentData) {
-						ig.subscriptions.unsubscribe({id: data.id});
-					}
+					//}
+					//if (--tasksToGo === 0 && !sentData) {
+					//	ig.subscriptions.unsubscribe({id: data.id});
+					//}
 			})
-		}
+		});
 	},
 
 	// If connection to client is terminated
@@ -117,6 +116,9 @@ function getRecent(tag, num, callback) {
 	ig.tags.recent({name: tag, complete: function(result, limit){
 		callback(result);
 	}});
+}
+function sendUrl(tagName) {
+	return 'https://api.instagram.com/v1/tags/' + tagName + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
 }
 function addImages(viewers, callback) {
 	var jsonViewers = {viewers: []};

@@ -2,18 +2,29 @@
 <head>
 	<title></title>
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<script>
 
 	var socket = io.connect('http://yamana.herokuapp.com');
 	socket.on('conn', function (data) {
 		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1]});
 	});
-	socket.on('instagram', function (data) {
+	socket.on('instagram', function (url) {
 		var main = document.getElementById('main');
-		console.log(data);
-		data.forEach(function(image) {
-			main.innerHTML = newImage(image) + main.innerHTML;
-		})
+		console.log(url);
+		var url = data.show;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        crossDomain: true,
+        dataType: 'jsonp'
+    }).done(function (data) {
+        data.forEach(function(image) {
+					main.innerHTML = newImage(image) + main.innerHTML;
+				})
+    });
+
 	});
 	function newImage(image) {
 		var html = '<img class="image" src="' + image.images.standard_resolution.url + '">'
