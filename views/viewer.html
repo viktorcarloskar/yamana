@@ -10,10 +10,10 @@
 	socket.on('conn', function (data) {
 		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1]});
 	});
-	socket.on('instagram', function (url) {
+	socket.on('instagram', function (data) {
 		var main = document.getElementById('main');
-		console.log(url);
 		var url = data.show;
+		console.log(data);
     $.ajax({
         url: url,
         type: 'POST',

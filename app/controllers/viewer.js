@@ -56,9 +56,8 @@ module.exports = {
 						if (err) return next(err);
 
 						db.models.viewers.get(viewerId, function(err, viewer) {
-								getRecent(viewer.hashtag, 10, function(data) {
-									socket.emit('instagram', data);
-								});
+								socket.emit('instagram', sendUrl(viewer.hashtag));
+
 								//Starts instagram subscription
 								ig.tags.subscribe({ object_id: viewer.hashtag, id: socket.id});
 						});
@@ -111,11 +110,6 @@ module.exports = {
 		// Unsubscribes to instagram
 		ig.subscriptions.unsubscribe({id: socket.id});
 	}
-}
-function getRecent(tag, num, callback) {
-	ig.tags.recent({name: tag, complete: function(result, limit){
-		callback(result);
-	}});
 }
 function sendUrl(tagName) {
 	return 'https://api.instagram.com/v1/tags/' + tagName + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
