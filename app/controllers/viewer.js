@@ -78,26 +78,28 @@ module.exports = {
 	// Function that handles the data from instagram
 	igPost: function(req, res) {
 		//The raw data from instagram
-		var data = req.body;
-		console.log(data);
-		console.log(data.data);
+		if (req.body.length > 0) {
+			var data = req.body[0];
+			console.log(data);
+			console.log(data.data);
 
-		// Async fix variables
-		var tasksToGo = clients.length;
-		var sentData = false;
+			// Async fix variables
+			var tasksToGo = clients.length;
+			var sentData = false;
 
-		// Loops all connected clients to know wich one to send to
-		if (tasksToGo === 0)
-			callback(viewers);
-		clients.forEach(function(client) {
-				if (client.id == data.id) {
-					client.emit('instagram', data.data);
-					sentData = true;
-				}
-				if (--tasksToGo === 0 && !sentData) {
-					ig.subscriptions.unsubscribe({id: data.id});
-				}
-		})
+			// Loops all connected clients to know wich one to send to
+			if (tasksToGo === 0)
+				callback(viewers);
+			clients.forEach(function(client) {
+					if (client.id == data.id) {
+						client.emit('instagram', data.data);
+						sentData = true;
+					}
+					if (--tasksToGo === 0 && !sentData) {
+						ig.subscriptions.unsubscribe({id: data.id});
+					}
+			})
+		}
 	},
 
 	// If connection to client is terminated
