@@ -7,7 +7,7 @@ var Hashids   = require('hashids'),
 
 ig.set('client_id', settings.instagram.client_id);
 ig.set('client_secret', settings.instagram.client_secret);
-ig.set('callback_url', settings.instagram.callback_url);
+//ig.set('callback_url', settings.instagram.callback_url);
 ig.set('maxSockets', 10);
 
 var clients = [];
@@ -60,7 +60,8 @@ module.exports = {
 									socket.emit('instagram', images);
 								})
 								//Starts instagram subscription
-								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: settings.instagram.callback_url + '/' + socket.id});
+								console.log('Subscribe postback %s', (settings.instagram.callback_url + '/' + socket.id));
+								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id)});
 						});
 				});
 		}
