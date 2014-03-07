@@ -60,7 +60,7 @@ module.exports = {
 									socket.emit('instagram', images);
 								})
 								//Starts instagram subscription
-								ig.tags.subscribe({ object_id: viewer.hashtag, 'verify_token': socket.id});
+								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: settings.instagram.callback_url + '/' + socket.id});
 						});
 				});
 		}
@@ -72,7 +72,6 @@ module.exports = {
 
 	// Function that responds to instagrams handshake method for verification
 	igHandshake: function(req, res) {
-		console.log(req.body);
 		ig.subscriptions.handshake(req, res);
 	},
 
@@ -81,6 +80,7 @@ module.exports = {
 		//The raw data from instagram
 
 		var data = req.body;
+		var socketId = req.params.id;
 
 		data.forEach(function(tag) {
 			// Async fix variables
@@ -93,7 +93,7 @@ module.exports = {
 				clients.forEach(function(client) {
 					console.log(tag);
 					console.log(client);
-					if (client.socket.id == tag.verify_token) {
+					if (client.socket.id == socketId) {
 						getRecent(tag.object_id, socket.min_id, function(images) {
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
