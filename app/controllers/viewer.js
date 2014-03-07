@@ -58,17 +58,20 @@ module.exports = {
 						db.models.viewers.get(viewerId, function(err, viewer) {
 								getRecent(viewer.hashtag, null, function(images) {
 									socket.emit('instagram', images);
+
+									// Find socket and set min id to get next time
+									clients.forEach(function(client) {
+										if (client.socket.id == socket.id) {
+											setMinId(client, images);
+										}
+									})
 								})
+
 								//Starts instagram subscription
-								console.log('Subscribe postback %s', (settings.instagram.callback_url + '/' + socket.id));
 								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id + '/')});
 						});
 				});
 		}
-
-		console.log('Data from fetch');
-		console.log(data);
-		console.log(clients.length)
 	},
 
 	// Function that responds to instagrams handshake method for verification
@@ -92,8 +95,6 @@ module.exports = {
 			if (tasksToGo === 0)
 				callback(viewers);
 				clients.forEach(function(client) {
-					console.log(tag);
-					console.log(client);
 					if (client.socket.id == socketId) {
 						getRecent(tag.object_id, client.socket.min_id, function(images) {
 							client.socket.emit('instagram', images);
