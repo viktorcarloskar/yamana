@@ -69,17 +69,45 @@ module.exports = {
 		console.log(data);
 		console.log(clients.length)
 	},
+
+	// Function that responds to instagrams handshake method for verification
 	igHandshake: function(req, res) {
 		ig.subscriptions.handshake(req, res);
 	},
+
+	// Function that handles the data from instagram
 	igPost: function(req, res) {
-		console.log(req);
+		//The raw data from instagram
+		var data = req.body;
+		console.log(data);
+
+		// Async fix variables
+		var tasksToGo = clients.length;
+		var sentData = false;
+
+		// Loops all connected clients to know wich one to send to
+		if (tasksToGo === 0)
+			callback(viewers);
+		clients.forEach(function(client) {
+				if (client.id == data.id) {
+					client.emit('instagram', data);
+					sentData = true;
+				}
+				if (--tasksToGo === 0 && !sentData) {
+					ig.subscriptions.unsubscribe({id: data.id});
+				}
+		})
 	},
+
+	// If connection to client is terminated
 	closedConn: function(socket) {
 		var index = clients.indexOf(socket);
+		// Removes socket from array
 		if (index > -1) {
 			clients.splice(index, 1);
 		}
+		// Unsubscribes to instagram
+		ig.subscriptions.unsubscribe({id: socket.id});
 	}
 }
 function getRecent(tag, num, callback) {
