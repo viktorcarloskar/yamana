@@ -3,7 +3,6 @@
 <head>
 	<title></title>
 	<script src="/socket.io/socket.io.js" type="text/javascript"></script>
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
 	<script>
 
 	var socket = io.connect('http://yamana.herokuapp.com');
@@ -12,19 +11,13 @@
 	});
 	socket.on('instagram', function (data) {
 		var main = document.getElementById('main');
-		var url = data.show;
+
 		console.log(data);
-    $.ajax({
-        url: url,
-        type: 'POST',
-        crossDomain: true,
-        dataType: 'jsonp'
-    	}).done(function (data) {
-        data.forEach(function(image) {
-					console.log(image);
-					main.innerHTML = newImage(image) + main.innerHTML;
-				})
-    });
+
+		data.forEach(function(image) {
+			console.log(image);
+			main.innerHTML = newImage(image) + main.innerHTML;
+		})
 
 	});
 	function newImage(image) {

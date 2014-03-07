@@ -44,7 +44,7 @@ module.exports = {
 		})
 	},
 	newConn: function(socket) {
-		clients.push(socket);
+		clients.push({socket: socket, min_id: ''});
 		return true;
 	},
 	init: function(socket, data) {
@@ -56,10 +56,11 @@ module.exports = {
 						if (err) return next(err);
 
 						db.models.viewers.get(viewerId, function(err, viewer) {
-								socket.emit('instagram', sendUrl(viewer.hashtag));
-
+								getRecent(viewer.hashtag, null, function(images) {
+									socket.emit('instagram', images);
+								})
 								//Starts instagram subscription
-								ig.tags.subscribe({ object_id: viewer.hashtag, id: socket.id});
+								ig.tags.subscribe({ object_id: viewer.hashtag, verify_token: socket.id});
 						});
 				});
 		}
@@ -88,14 +89,19 @@ module.exports = {
 			// Loops all connected clients to know wich one to send to
 			if (tasksToGo === 0)
 				callback(viewers);
-			clients.forEach(function(client) {
-					//if (client.id ==  {
-						client.emit('instagram', sendUrl(tag.object_id));
+				clients.forEach(function(client) {
+					if (client.socket.id == tag.verify_token) {
+						getRecent(tag.object_id, socket.min_id, function(images) {
+
+							client.socket.emit('instagram', images);
+							setMinId(client, images);
+						})
 						sentData = true;
-					//}
-					//if (--tasksToGo === 0 && !sentData) {
-					//	ig.subscriptions.unsubscribe({id: data.id});
-					//}
+					}
+					if (--tasksToGo === 0 && !sentData) {
+						ig.subscriptions.unsubscribe({id: tag.id});
+						console.log('Subscription not attached to socket');
+					}
 			})
 		});
 	},
@@ -110,6 +116,35 @@ module.exports = {
 		// Unsubscribes to instagram
 		ig.subscriptions.unsubscribe({id: socket.id});
 	}
+}
+
+function getRecent(tagName, min_id, next) {
+	if (min_id) {
+			ig.tags.recent({name: tagName, MIN_ID: min_id, complete: function(data, pagination) {
+				next(data);
+			}});
+	}
+	else {
+			ig.tags.recent({name: tagName, complete: function(data, pagination) {
+				next(data);
+			}});
+	}
+}
+function getMinID(geoName, callback){
+
+}
+function setMinID(socket, data){
+    var sorted = data.sort(function(a, b){
+        return parseInt(b.id) - parseInt(a.id);
+    });
+    var nextMinID;
+    try {
+        nextMinID = parseInt(sorted[0].id);
+				socket.min_id = nextMinID;
+    } catch (e) {
+        console.log('Error parsing min ID');
+        console.log(sorted);
+    }
 }
 function sendUrl(tagName) {
 	return 'https://api.instagram.com/v1/tags/' + tagName + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
