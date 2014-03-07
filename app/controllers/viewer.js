@@ -95,8 +95,8 @@ module.exports = {
 				callback(viewers);
 				clients.forEach(function(client) {
 					if (client.socket.id == socketId) {
-						console.log('Min_id: %s', client.socket.min_id);
-						getRecent(tag.object_id, client.socket.min_id, function(images) {
+						console.log('Min_id: %s', client.min_id);
+						getRecent(tag.object_id, client.min_id, function(images) {
 							client.socket.emit('instagram', images);
 							setMinId(client, images);
 						})
