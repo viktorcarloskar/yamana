@@ -44,7 +44,7 @@ module.exports = {
 		})
 	},
 	newConn: function(socket) {
-		clients.push({socket: socket, min_id: null});
+		clients.push({socket: socket, min_id: null, hashtag: null});
 		return true;
 	},
 	init: function(socket, data) {
@@ -64,6 +64,7 @@ module.exports = {
 											clients.forEach(function(client) {
 												if (client.socket.id == socket.id) {
 													setMinId(client, pagination);
+													setHashtag(client, viewer.hashtag);
 												}
 											})
 									}
@@ -85,27 +86,33 @@ module.exports = {
 	igPost: function(req, res) {
 		//The raw data from instagram
 		var data = req.body;
-		var socketId = req.params.id;
+		var subscriptionId = req.params.id;
+		var hashtag = req.params.object_id;
 
 		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
 			var sentData = false;
+			var images = null;
 
 			// Loops all connected clients to know wich one to send to
 			if (tasksToGo === 0)
 				callback(viewers);
 				clients.forEach(function(client) {
-					if (client.socket.id == socketId) {
+
+					// Yeah, a bit ineffective BUT only IF two clients is subscribing to
+					// the same hashtag
+					if (client.hashtag == hashtag) {
 						console.log('Min_id: %s', client.min_id);
-						getRecent(tag.object_id, client.min_id, function(images, pagination) {
-							if (images.length > 0) {
-									// Find socket and set min id to get next time
-									client.socket.emit('instagram', images);
-									setMinId(client, pagination);
+						getRecent(tag.object_id, client.min_id, function(data, pagination) {
+							if (data.length > 0) {
+								images = data;
+								client.socket.emit('instagram', images);
+								// Find socket and set min id to get next time
+								setMinId(client, pagination);
 							}
+							sentData = true;
 						})
-						sentData = true;
 					}
 					if (--tasksToGo === 0 && !sentData) {
 						ig.subscriptions.unsubscribe({id: tag.id});
@@ -141,6 +148,9 @@ function getRecent(tagName, min_id, next) {
 }
 function setMinId(client, data){
 		client.min_id = data.min_tag_id;
+}
+function setHashtag(client, hashtag){
+		client.hashtag = hashtag;
 }
 function addImages(viewers, callback) {
 	var jsonViewers = {viewers: []};
