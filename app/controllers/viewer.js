@@ -44,7 +44,6 @@ module.exports = {
 		})
 	},
 	newConn: function(socket) {
-		clients.push({socket: socket, min_id: null, hashtag: null});
 		return true;
 	},
 	init: function(socket, data) {
@@ -59,19 +58,12 @@ module.exports = {
 								getRecent(viewer.hashtag, null, function(images, pagination) {
 									socket.emit('instagram', images);
 
-									if (images.length > 0) {
-											// Find socket and set min id to get next time
-											clients.forEach(function(client) {
-												if (client.socket.id == socket.id) {
-													setMinId(client, pagination);
-													setHashtag(client, viewer.hashtag);
-												}
-											})
-									}
-								})
+									// Save socket for sending updates
+									clients.push({socket: socket, min_id: pagination.min_tag_id, hashtag: viewer.hashtag});
 
-								//Starts instagram subscription
-								ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id + '/')});
+									// Start subscription of images
+									ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/')});
+								})
 						});
 				});
 		}
@@ -86,7 +78,6 @@ module.exports = {
 	igPost: function(req, res) {
 		//The raw data from instagram
 		var data = req.body;
-		var subscriptionId = req.params.id;
 		var hashtag = req.params.object_id;
 
 		data.forEach(function(tag) {
@@ -97,9 +88,8 @@ module.exports = {
 
 			// Loops all connected clients to know wich one to send to
 			if (tasksToGo === 0)
-				callback(viewers);
 				clients.forEach(function(client) {
-
+					console.log('Client: %s, %s', client.socket.id, client.hashtag);
 					// Yeah, a bit ineffective BUT only IF two clients is subscribing to
 					// the same hashtag
 					if (client.hashtag == hashtag) {
@@ -124,13 +114,12 @@ module.exports = {
 
 	// If connection to client is terminated
 	closedConn: function(socket) {
-		var index = clients.indexOf(socket);
-		// Removes socket from array
-		if (index > -1) {
-			clients.splice(index, 1);
-		}
-		// Unsubscribes to instagram
-		ig.subscriptions.unsubscribe({id: socket.id});
+		// This is terribly wrong
+		clients.forEach(function(client) {
+			if (client.socket.id = socket.id) {
+				ig.subscriptions.unsubscribe({id: socket.id});
+			}
+		})
 	}
 }
 
