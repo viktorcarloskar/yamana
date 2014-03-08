@@ -80,11 +80,15 @@ module.exports = {
 		var data = req.body;
 
 		data.forEach(function(tag) {
+
 			// Async fix variables
 			var tasksToGo = clients.length;
 			var sentData = false;
 			var images = null;
 			var hashtag = tag.object_id;
+
+			console.log(tag);
+			console.log(tasksToGo);
 
 			// Loops all connected clients to know wich one to send to
 			if (tasksToGo === 0)
