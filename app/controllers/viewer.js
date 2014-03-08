@@ -79,9 +79,6 @@ module.exports = {
 		//The raw data from instagram
 		var data = req.body;
 
-		console.log(data);
-		console.log('Nr of clients: %s', clients.length);
-
 		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
@@ -95,12 +92,16 @@ module.exports = {
 					console.log('Client: %s, %s', client.socket.id, client.hashtag);
 					// Yeah, a bit ineffective BUT only IF two clients is subscribing to
 					// the same hashtag
+					console.log('Is this the same? %s == %s', client.hashtag, hashtag);
 					if (client.hashtag == hashtag) {
 						console.log('Min_id: %s', client.min_id);
 						getRecent(tag.object_id, client.min_id, function(data, pagination) {
+							console.log('Data is %s long', data.length);
 							if (data.length > 0) {
 								images = data;
 								client.socket.emit('instagram', images);
+								console.log('Sent data to client:');
+								console.log(images);
 								// Find socket and set min id to get next time
 								setMinId(client, pagination);
 							}
