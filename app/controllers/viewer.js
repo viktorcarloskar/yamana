@@ -78,16 +78,17 @@ module.exports = {
 	igPost: function(req, res) {
 		//The raw data from instagram
 		var data = req.body;
+		console.log(data);
 
 		data.forEach(function(tag) {
 
+			console.log(tag);
 			// Async fix variables
 			var tasksToGo = clients.length;
 			var sentData = false;
 			var images = null;
 			var hashtag = tag.object_id;
 
-			console.log(tag);
 			console.log(tasksToGo);
 
 			// Loops all connected clients to know wich one to send to
