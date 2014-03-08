@@ -80,6 +80,9 @@ module.exports = {
 		var data = req.body;
 		var hashtag = req.params.object_id;
 
+		console.log(data);
+		console.log('Nr of clients: %s', clients.length);
+
 		data.forEach(function(tag) {
 			// Async fix variables
 			var tasksToGo = clients.length;
