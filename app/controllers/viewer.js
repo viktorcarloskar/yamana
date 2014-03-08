@@ -78,7 +78,6 @@ module.exports = {
 	igPost: function(req, res) {
 		//The raw data from instagram
 		var data = req.body;
-		var hashtag = req.params.object_id;
 
 		console.log(data);
 		console.log('Nr of clients: %s', clients.length);
@@ -88,6 +87,7 @@ module.exports = {
 			var tasksToGo = clients.length;
 			var sentData = false;
 			var images = null;
+			var hashtag = tag.object_id;
 
 			// Loops all connected clients to know wich one to send to
 			if (tasksToGo === 0)
