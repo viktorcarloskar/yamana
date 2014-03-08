@@ -92,31 +92,30 @@ module.exports = {
 			console.log(tasksToGo);
 
 			// Loops all connected clients to know wich one to send to
-			if (tasksToGo === 0)
-				clients.forEach(function(client) {
-					console.log('Client: %s, %s', client.socket.id, client.hashtag);
-					// Yeah, a bit ineffective BUT only IF two clients is subscribing to
-					// the same hashtag
-					console.log('Is this the same? %s == %s', client.hashtag, hashtag);
-					if (client.hashtag == hashtag) {
-						console.log('Min_id: %s', client.min_id);
-						getRecent(tag.object_id, client.min_id, function(data, pagination) {
-							console.log('Data is %s long', data.length);
-							if (data.length > 0) {
-								images = data;
-								client.socket.emit('instagram', images);
-								console.log('Sent data to client:');
-								console.log(images);
-								// Find socket and set min id to get next time
-								setMinId(client, pagination);
-							}
-							sentData = true;
-						})
-					}
-					if (--tasksToGo === 0 && !sentData) {
-						ig.subscriptions.unsubscribe({id: tag.id});
-						console.log('Subscription not attached to socket');
-					}
+			clients.forEach(function(client) {
+				console.log('Client: %s, %s', client.socket.id, client.hashtag);
+				// Yeah, a bit ineffective BUT only IF two clients is subscribing to
+				// the same hashtag
+				console.log('Is this the same? %s == %s', client.hashtag, hashtag);
+				if (client.hashtag == hashtag) {
+					console.log('Min_id: %s', client.min_id);
+					getRecent(tag.object_id, client.min_id, function(data, pagination) {
+						console.log('Data is %s long', data.length);
+						if (data.length > 0) {
+							images = data;
+							client.socket.emit('instagram', images);
+							console.log('Sent data to client:');
+							console.log(images);
+							// Find socket and set min id to get next time
+							setMinId(client, pagination);
+						}
+						sentData = true;
+					})
+				}
+				if (--tasksToGo === 0 && !sentData) {
+					ig.subscriptions.unsubscribe({id: tag.id});
+					console.log('Subscription not attached to socket');
+				}
 			})
 		});
 	},
