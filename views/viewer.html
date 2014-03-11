@@ -31,9 +31,9 @@
         return parseInt(a.id) - parseInt(b.id);
     });
 
-		sorted.forEach(function(image) {
-			setTimeout(function() {addImage(image)}, 500);
-		})
+		sorted.forEach(setInterval(function(image) {
+			addImage(image);
+		}), 500);
 
 	});
 
