@@ -31,10 +31,6 @@
         return parseInt(a.id) - parseInt(b.id);
     });
 
-		sorted.forEach(function(image) {
-			addImage(image);
-		})
-		/*
 		var i = 0;
 		var interval = setInterval(function() {
 			addImage(sorted[i]);
@@ -43,7 +39,6 @@
 				clearInterval(interval);
 			}
 		}, 500);
-		*/
 	});
 
 	function addFakeImage() {
@@ -103,7 +98,22 @@
 		main.innerHTML = img + main.innerHTML;
 	}
 	function getImgHeight() {
-		return (window.innerWidth / 4)
+		var images = document.querySelectorAll('.image');
+		var valOne = Math.floor(Math.random() * images.length)
+		var valTwo = Math.floor(Math.random() * images.length)
+
+		// IF they are the same value, generate a new
+		while (valOne == valTwo && images.length > 1) {
+			valTwo = Math.floor(Math.random() * images.length)
+		}
+
+		var imageOne = images[valOne]
+		var imageTwo = images[valTwo]
+		if ((imageOne || imageTwo) && (imageOne.clientHeight + imageTwo.clientHeight) > 0) {
+			return Math.floor((imageOne.clientHeight + imageTwo.clientHeight) / 2);
+		}
+		else
+			return (window.innerWidth / 4)
 	}
 	function setImgHeight() {
 
