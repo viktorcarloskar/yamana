@@ -4,7 +4,7 @@
 	<title></title>
 	<script src="/socket.io/socket.io.js" type="text/javascript"></script>
 	<script>
-
+	document.onload = init;
 	var socket = io.connect('http://yamana.herokuapp.com');
 	socket.on('conn', function (data) {
 		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1]});
@@ -27,6 +27,22 @@
 	function newImage(image) {
 		var html = '<img class="image" src="' + image.images.standard_resolution.url + '">'
 		return html;
+	}
+
+	function init() {
+		launchFullscreen(document.documentElement);
+	}
+
+	function launchFullscreen(element) {
+	  if(element.requestFullscreen) {
+	    element.requestFullscreen();
+	  } else if(element.mozRequestFullScreen) {
+	    element.mozRequestFullScreen();
+	  } else if(element.webkitRequestFullscreen) {
+	    element.webkitRequestFullscreen();
+	  } else if(element.msRequestFullscreen) {
+	    element.msRequestFullscreen();
+	  }
 	}
 	</script>
 </head>

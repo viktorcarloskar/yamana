@@ -3,6 +3,7 @@ var settings  = require('../../config/settings')
 var models    = require('../models/');
 var Hashids   = require('hashids'),
 	hashids     = new Hashids('mmmbophashhansonmmmbopanderzfavoriter', 10);
+var moment    = require('moment');
 
 
 ig.set('client_id', settings.instagram.client_id);
@@ -97,7 +98,7 @@ module.exports = {
 				// Yeah, a bit ineffective BUT only IF two clients is subscribing to
 				// the same hashtag
 				console.log('Is this the same? %s == %s', client.hashtag, hashtag);
-				if (client.hashtag == hashtag) {
+				if (client.hashtag.toLowerCase() == hashtag.toLowerCase()) {
 					console.log('Min_id: %s', client.min_id);
 					getRecent(tag.object_id, client.min_id, function(data, pagination) {
 						console.log('Data is %s long', data.length);
@@ -179,7 +180,7 @@ function hashIds(viewers, callback) {
 			res.push({
 				id : hashids.encrypt(viewer.id),
 				hashtag : viewer.hashtag,
-				created : viewer.created,
+				created : moment(viewer.created).fromNow(),
 				last_opened : viewer.last_opened
 			})
 			if (--tasksToGo === 0)

@@ -4,16 +4,19 @@
 @color-white: #FAFAFA;
 
 @color-placeholder: #5f5f5f;
-@color-blue-div: #2f3439;
-@color-darker-blue-div: #2c3035;
+//@color-blue-div: #2f3439;
+@color-blue-div: #131415;
+//@color-darker-blue-div: #2c3035;
+@color-darker-blue-div: #0e0f10;
 @color-confirm-green: #59a553;
 @color-placeholder: #5f5f5f;
+@color-mid-gray: #d7d7d7;
 
 @color-google-red: #db4437;
 @color-facebook-blue: #3b5998;
 @color-twitter-blue: #55acee;
 
-// VARIABLES 
+// VARIABLES
 
 @std-width: 1200px;
 @std-percentage-width: 96%;
@@ -54,18 +57,24 @@
 //  font-style: normal;
 //}
 @font-face {
-	font-family: 'proxima_nova_bold';
+	font-family: 'proxima_nova';
 	src: url('../fonts/proximanova-bold-webfont.eot');
-	src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/proximanova-bold-webfont.woff') format('woff'), url('../fonts/proximanova-bold-webfont.ttf') format('truetype'), url('../fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
-	font-weight: normal;
+	src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/proximanova-bold-webfont.woff') format('woff'),
+			 url('../fonts/proximanova-bold-webfont.ttf') format('truetype'),
+			 url('../fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+	font-weight: bold;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'proxima_novalight_italic';
+	font-family: 'proxima_nova';
 	src: url('../fonts/proximanova-lightitalic-webfont.eot');
-	src: url('../fonts/proximanova-lightitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/proximanova-lightitalic-webfont.woff') format('woff'), url('../fonts/proximanova-lightitalic-webfont.ttf') format('truetype'), url('../fonts/proximanova-lightitalic-webfont.svg#proxima_novalight_italic') format('svg');
-	font-weight: normal;
-	font-style: normal;
+	src: url('../fonts/proximanova-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/proximanova-lightitalic-webfont.woff') format('woff'),
+			 url('../fonts/proximanova-lightitalic-webfont.ttf') format('truetype'),
+			 url('../fonts/proximanova-lightitalic-webfont.svg#proxima_novalight_italic') format('svg');
+	font-weight: 100;
+	font-style: italic;
 }
 @font-face {
     font-family: 'proxima_nova';
@@ -75,7 +84,7 @@
          url('../fonts/proximanova-light-webfont.ttf') format('truetype'),
          url('../fonts/proximanova-light-webfont.svg#proxima_novalight') format('svg');
     font-weight: 100;
-    font-style: 100;
+    font-style: normal;
 }
 
 
@@ -90,20 +99,20 @@
 /* THOSE HEADLINES */
 
 h1 {
-	font-family: @std-font-family-bold;
+	font-family: @std-font-family;
 	font-size: 5.5rem;
 	font-weight: bold;
 }
 
 h2 {
-	font-family: @std-font-family-bold;
+	font-family: @std-font-family;
 	font-size: 3.5rem;
 	font-weight: bold;
 }
 h3 {
-	font-family: @std-font-family-bold;
+	font-family: @std-font-family;
 	font-size: 3rem;
-	font-weight: 600;
+	font-weight: bold;
 }
 h4 {
 	font-family: @std-font-family;
@@ -132,7 +141,7 @@ h4 {
 		height: 0px;
 		border-style: solid;
 		border-width: 0 0 23px 23px;
-		border-color: transparent transparent #2c3035 transparent;
+		border-color: transparent transparent @color-darker-blue-div transparent;
 		position: absolute;
 		top: -23px;
 		right: 23px;
@@ -145,7 +154,7 @@ h4 {
 	}
 	.vg-btn-green {
 		.vg-btn(@color-confirm-green, @color-white);
-		font-family: @std-font-family !important; 
+		font-family: @std-font-family !important;
 		font-weight: 100;
 	}
 	.vg-tb {
@@ -176,6 +185,10 @@ h4 {
     color:    @color-placeholder;;
 }
 
+body, html {
+    height: 100%;
+}
+
 body {
 	color: @color-black;
 	background-color: @color-white;
@@ -204,11 +217,11 @@ header
 {
 	z-index: 1000;
 	width: 100%;
-	position: absolute; 
+	position: absolute;
 	top: 0;
 	height: @header-height;
-	background-color: @color-blue-div;
-	font-family: @std-font-family !important; 
+	//background-color: @color-blue-div;
+	font-family: @std-font-family !important;
 	font-weight: 100;
 	.no-select();
 	.container {
@@ -229,8 +242,8 @@ header
 				height: 100%;
 				padding-left: 20px;
 				padding-right: 20px;
-				border-left: 1px solid @color-darker-blue-div;
-				background-color: @color-blue-div;
+				//border-left: 1px solid @color-darker-blue-div;
+				//background-color: @color-blue-div;
 				font-size: 1.4rem;
 				color: @color-white;
 				letter-spacing: 1.3px;
@@ -246,10 +259,11 @@ header
 				transition: background 200ms ease-in;
 			}
 			> li:last-child {
-				border-right: 1px solid @color-darker-blue-div;	
+				//border-right: 1px solid @color-darker-blue-div;
 			}
-			> li:hover {
-				background-color: @color-darker-blue-div;
+			> li a:hover{
+				//background-color: @color-darker-blue-div;
+				color: darken(@color-white, 50%);
 			}
 			i {
 				margin-left: 14px;
@@ -259,6 +273,7 @@ header
 	}
 	#menu-user {
 		position: relative;
+
 		#user-menu {
 			display: block;
 			position: absolute;
@@ -303,48 +318,168 @@ header
 }
 
 #content {
-	margin-top: @header-height;
-	min-height: @min-height;
-	background: url(../img/bg-1.png) no-repeat center center; 
-	-webkit-background-size: cover;
-	   -moz-background-size: cover;
-	     -o-background-size: cover;
-	        background-size: cover;
+	//margin-top: @header-height;
+	height: 100%;
+}
+.main {
+	padding-top: @header-height;
 }
 
 
 footer {
 	width: 100%;
-	height: 200px;
-	position: absolute;
+
 	background-color: @color-blue-div;
 }
 
 /* ========================================================
    HOMEPAGE
 */
-
+#home.main {
+	padding-top: 0;
+}
 #home {
-    position: relative;
-    overflow: hidden;
-    padding-top: 5%;
+
+		height: 100%;
     .left {
     	float: left;
-    	background-color: rgba(255, 255, 0, 0.2);
     }
     .right {
     	float: left;
-    	background-color: rgba(255, 0, 0, 0.2);
     }
+		.container {
+			overflow: inherit;
+		}
     .one {
+			padding-top: @header-height;
+			background: url(../img/bg-3.png) no-repeat center center;
+			-webkit-background-size: cover;
+				 -moz-background-size: cover;
+					 -o-background-size: cover;
+							background-size: cover;
+
+			height: 95%;
     	overflow: hidden;
+			color: @color-white;
     	.left {
-    		width: 40%;
+				position: relative;
+				overflow:hidden;
+    		width: 60%;
+				height: 100%;
+				> div {
+					margin-top: 50%;
+				}
     	}
     	.right {
-    		width: 60%;
+    		width: 40%;
     	}
     }
+		.two {
+			background-color: @color-mid-gray;
+			padding-top: 5%;
+			overflow:hidden;
+			.left {
+				width: 50%;
+				position: relative;
+				#great-things {
+					width: 80%;
+					margin: 5%;
+					margin-right: 15%;
+					ul {
+						margin-top: 15%;
+						li {
+							font-weight: bold;
+							font-size: 2.2rem;
+							margin-bottom: 4%;
+							overflow:hidden;
+							i {
+								width: 10%;
+								text-align: center;
+								margin-right: 3%;
+								float:left;
+							}
+							p {
+								width: 87%;
+								float:left;
+							}
+						}
+					}
+				}
+			}
+			.right {
+				overflow: hidden;
+				width: 50%;
+				#cinemadisplay {
+					height: 100%;
+					min-height: 600px;
+					position: relative;
+					overflow: hidden;
+					img {
+						overflow: hidden;
+						position: relative;
+						width:100%;
+						z-index: 51;
+					}
+					video {
+						position: absolute;
+						z-index: 50;
+						width: 94%;
+						margin-left: 3%;
+						margin-top: 5%;
+						top:0;
+					}
+				}
+			}
+		}
+		#flash {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			background-color: @color-blue-div;
+			z-index: 1000;
+			opacity: 1;
+			overflow: hidden;
+			.logo {
+				margin-top: 20%;
+				position: relative;
+				margin-left: auto;
+				margin-right: auto;
+				width: 400px;
+				height: 100px;
+			}
+			img {
+				display:block;
+				position: absolute;
+				margin-left: 140px;
+				margin-top: 40px;
+			}
+			.overlay {
+				position: absolute;
+				width: 400px;
+				height: 100px;
+				z-index: 1001;
+				background: -moz-linear-gradient(left,  rgba(19,20,21,0) 0%, rgba(19,20,21,1) 19%, rgba(19,20,21,1) 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(19,20,21,0)), color-stop(19%,rgba(19,20,21,1)), color-stop(100%,rgba(19,20,21,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  rgba(19,20,21,0) 0%,rgba(19,20,21,1) 19%,rgba(19,20,21,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  rgba(19,20,21,0) 0%,rgba(19,20,21,1) 19%,rgba(19,20,21,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  rgba(19,20,21,0) 0%,rgba(19,20,21,1) 19%,rgba(19,20,21,1) 100%); /* IE10+ */
+        background: linear-gradient(to right,  rgba(19,20,21,0) 0%,rgba(19,20,21,1) 19%,rgba(19,20,21,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00131415', endColorstr='#131415',GradientType=1 ); /* IE6-9 */
+			}
+		}
+		#flash.animated {
+			.transition(all 1s ease-in 1.5s);
+
+			.overlay {
+				.transform(translate(300px, 0));
+				.transition(all 1s ease-in);
+			}
+			img {
+				opacity: 0;
+				.transition(all 500ms ease-out 1.5s);
+			}
+			opacity: 0;
+		}
 
 }
 
@@ -352,8 +487,13 @@ footer {
    LOGIN PAGE
 */
 #login {
-	padding-top: 30px;
-	min-height: @min-height;
+	padding-top: 10%;
+	height: 100%;
+	background: url(../img/bg-3.png) no-repeat center center;
+	-webkit-background-size: cover;
+		-moz-background-size: cover;
+			-o-background-size: cover;
+					background-size: cover;
 	#login-form-page {
 		padding-top: 30px;
 		padding-bottom: 30px;
@@ -401,12 +541,18 @@ footer {
 */
 
 #signup {
+	height: 100%;
+	background: url(../img/bg-3.png) no-repeat center center;
+	-webkit-background-size: cover;
+		-moz-background-size: cover;
+			-o-background-size: cover;
+					background-size: cover;
 	#signup-form {
 		padding-top: 30px;
 		padding-bottom: 30px;
 		#signup-dialog {
 			width: 400px;
-			.vg-popup(@color-darker-blue-div);
+			.vg-popup(@color-blue-div);
 			color: @color-white;
 			margin-left: auto;
 			margin-right: auto;
@@ -449,10 +595,10 @@ footer {
 		    content: "";
 		}
 		.vg-btn {
-			font-family: @std-font-family !important; 
+			font-family: @std-font-family !important;
 			font-weight: 100;
 		}
-		a.vg-btn { 
+		a.vg-btn {
 			height: 100%;
 		}
 		.vg-btn-wrapper {
@@ -463,7 +609,7 @@ footer {
 		}
 		.vg-btn-green {
 			.vg-btn(@color-confirm-green, @color-white);
-			
+
 		}
 		.signup-or {
 			text-align: center;
@@ -503,4 +649,53 @@ footer {
 			.vg-btn(@color-twitter-blue, @color-white);
 		}
 	}
+}
+
+
+/* ========================================================
+	DASHBOARD PAGE
+*/
+
+#dashboard {
+	background: url(../img/bg-3.png) no-repeat center center;
+	-webkit-background-size: cover;
+		-moz-background-size: cover;
+			-o-background-size: cover;
+					background-size: cover;
+
+	height: 100%;
+
+	.viewer {
+		width: 24%;
+		float:left;
+		background: @color-white;
+		margin-right: 1%;
+		.rounded-corners(4px);
+		a {
+			display: block;
+			padding: 3%;
+			overflow: hidden;
+			color: @color-black;
+		}
+		.text {
+			overflow:hidden;
+			width: 100%;
+			> .left {
+				width: 100%;
+				font-size: 2rem;
+				font-weight: bold;
+				float: left;
+			}
+			> .right {
+				padding-top: 4%;
+				float: left;
+				font-size: 0.8rem;
+				color: @color-placeholder;
+				.time {
+					color: @color-black;
+				}
+			}
+		}
+	}
+
 }
