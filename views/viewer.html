@@ -54,7 +54,15 @@
 
 	function newImage(col, image) {
 		var imgHeight = getImgHeight();
-		var html = '<img class="image col' + col + '" style="top: -' + imgHeight + 'px;" src="' + image.images.standard_resolution.url + '">'
+		if (image.type == 'video') {
+			var html = '<video class="image col' + col + '" style="top: -' + imgHeight + 'px;" autoplay loop muted>'
+			 + '<source src="' + image.videos.standard_resolution.url + '" type="video/mp4">'
+			 + '<img src="' + image.images.standard_resolution.url + '">'
+			 + '</video>'
+		}
+		else {
+			var html = '<img class="image col' + col + '" style="top: -' + imgHeight + 'px;" src="' + image.images.standard_resolution.url + '">'
+		}
 		return html;
 	}
 
