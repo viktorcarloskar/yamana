@@ -31,6 +31,10 @@
         return parseInt(a.id) - parseInt(b.id);
     });
 
+		sorted.forEach(function(image) {
+			addImage(image);
+		})
+		/*
 		var i = 0;
 		var interval = setInterval(function() {
 			addImage(sorted[i]);
@@ -39,6 +43,7 @@
 				clearInterval(interval);
 			}
 		}, 500);
+		*/
 	});
 
 	function addFakeImage() {

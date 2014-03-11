@@ -63,10 +63,10 @@ body {
 .layout1 .image {
   position: absolute;
   width: 25%;
-  -webkit-transition: top 500ms ease-in-out;
-  -moz-transition: top 500ms ease-in-out;
-  -ms-transition: top 500ms ease-in-out;
-  -o-transition: top 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
 }
 .layout1 .col1 {
   left: 0;
