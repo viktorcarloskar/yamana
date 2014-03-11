@@ -31,6 +31,9 @@
         return parseInt(a.id) - parseInt(b.id);
     });
 
+		showImages(sorted);
+	});
+	function showImages(sorted) {
 		var i = 0;
 		var interval = setInterval(function() {
 			addImage(sorted[i]);
@@ -39,8 +42,7 @@
 				clearInterval(interval);
 			}
 		}, 500);
-	});
-
+	}
 	function addFakeImage() {
 		var image = {
 			images: {
