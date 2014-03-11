@@ -45,7 +45,7 @@
 
 	function newImage(col, image) {
 		var imgHeight = getImgHeight();
-		var html = '<img class="image col' + col + ' style="top: -' + imgHeight + 'px" src="' + image.images.standard_resolution.url + '">'
+		var html = '<img class="image col' + col + '" style="top: -' + imgHeight + 'px;" src="' + image.images.standard_resolution.url + '">'
 		return html;
 	}
 
@@ -59,7 +59,8 @@
 		var colClass = '.col' + col;
 		var imgs = document.querySelectorAll(colClass);
 		for (var i = 0; i < imgs.length; i++) {
-			imgs[i].style.top = (parseInt(imgs[i].style.top, 10) + getImgHeight()) + 'px';
+			var topVal = (parseInt(imgs[i].style.top, 10) + getImgHeight()) + 'px'
+			imgs[i].style.top = topVal;
 		}
 	}
 	function addImgHtml(img) {

@@ -61,8 +61,12 @@ body {
   overflow: hidden;
 }
 .layout1 .image {
-  float: left;
+  position: absolute;
   width: 25%;
+  -webkit-transition: top 500ms ease-in-out;
+  -moz-transition: top 500ms ease-in-out;
+  -ms-transition: top 500ms ease-in-out;
+  -o-transition: top 500ms ease-in-out;
 }
 .layout1 .col1 {
   left: 0;
