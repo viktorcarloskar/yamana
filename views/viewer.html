@@ -11,6 +11,12 @@
 	window.onload = init;
 
 	var columns = 4;
+	var cols = {
+		1: false,
+		2: false,
+		3: false,
+		4: false
+	}
 
 	var socket = io.connect('http://yamana.herokuapp.com');
 	socket.on('conn', function (data) {
@@ -26,7 +32,7 @@
     });
 
 		sorted.forEach(function(image) {
-			addImage((Math.floor(Math.random() * columns) + 1), image)
+			addImage(image)
 		})
 
 	});
@@ -39,7 +45,7 @@
 				}
 			}
 		}
-		addImage((Math.floor(Math.random() * columns) + 1), image);
+		addImage(image);
 	}
 
 	function newImage(col, image) {
@@ -48,7 +54,28 @@
 		return html;
 	}
 
-	function addImage(col, image) {
+	function addImage(image) {
+		var col = (Math.floor(Math.random() * columns) + 1)
+		var i = 0;
+		while (cols[col] && i < columns) {
+			col++;
+			i++;
+			if (col > columns) {
+				col = 1;
+			}
+		}
+		if (i >= columns) {
+			cols = {
+				1: false,
+				2: false,
+				3: false,
+				4: false
+			}
+		}
+		else {
+			cols[col] = true;
+		}
+
 		var img = newImage(col, image)
 		addImgHtml(img);
 		slideDown(col);
@@ -78,7 +105,11 @@
 
 		var imageOne = images[valOne]
 		var imageTwo = images[valTwo]
-		return Math.floor((imageOne.clientHeight + imageTwo.clientHeight) / 2);
+		if (imageOne && imageTwo) {
+			return Math.floor((imageOne.clientHeight + imageTwo.clientHeight) / 2);
+		}
+		else
+			return (window.innerWidth / 4)
 	}
 	function setImgHeight() {
 
@@ -136,7 +167,7 @@
 	<div id="fake-image">
 		DAS FAKE IMG
 	</div>
-	<div id="main" class="layout1"><img class="image" src="http://distilleryimage10.s3.amazonaws.com/a886c990a90b11e385020a5d4b2ab92e_8.jpg"><img class="image" src="http://distilleryimage10.s3.amazonaws.com/78a4cbb8a90211e3acbc0e58f9837a2a_8.jpg"><img class="image" src="http://distilleryimage9.s3.amazonaws.com/3c62dff0a90211e38c92125e9fe3ffd9_8.jpg"><img class="image" src="http://distilleryimage6.s3.amazonaws.com/e6373650a8ff11e3948f0a4825b4191e_8.jpg"><img class="image" src="http://distilleryimage2.s3.amazonaws.com/e96fde78a6e611e3aceb12f8a5fa1ad6_8.jpg"><img class="image" src="http://distilleryimage7.s3.amazonaws.com/b68aa18ea6df11e3a622128130bd76d7_8.jpg"><img class="image" src="http://distilleryimage4.s3.amazonaws.com/d2d2fee8a6dc11e3bb3a12b8df74a2f4_8.jpg"><img class="image" src="http://distilleryimage4.s3.amazonaws.com/e9e8abc6a6d911e394d312a1aa7ea1d4_8.jpg"><img class="image" src="http://distilleryimage6.s3.amazonaws.com/90f9af42a6d911e3b7ed12d69d74e3c2_8.jpg"><img class="image" src="http://distilleryimage7.s3.amazonaws.com/0b19b9daa6d911e399df12cd97da4603_8.jpg"><img class="image" src="http://distilleryimage10.s3.amazonaws.com/59a9512aa6d711e3834d0e6c3792784e_8.jpg"><img class="image" src="http://distilleryimage8.s3.amazonaws.com/86ae6f58a6d611e3ac3512b9a4187780_8.jpg"><img class="image" src="http://distilleryimage2.s3.amazonaws.com/7f4fb6f0a6d511e3bd5c0e0517cae372_8.jpg"><img class="image" src="http://distilleryimage2.s3.amazonaws.com/215a06f4a6d511e3b6530e9cd22cd9e6_8.jpg"><img class="image" src="http://distilleryimage11.s3.amazonaws.com/3cb3718ea6d411e3b7fd123d3be4afff_8.jpg"><img class="image" src="http://distilleryimage8.s3.amazonaws.com/0f3eaa44a64c11e39b35120dcfb1dcbc_8.jpg"><img class="image" src="http://distilleryimage7.s3.amazonaws.com/fbae0ec8a64811e39ad60e5ae8a94757_8.jpg"><img class="image" src="http://distilleryimage3.s3.amazonaws.com/181e2f30a64811e3bf5c1259423b3b1f_8.jpg"><img class="image" src="http://distilleryimage3.s3.amazonaws.com/f5960ce4a64711e38dac12b1ccdcdf87_8.jpg"><img class="image" src="http://distilleryimage11.s3.amazonaws.com/692a0360a64611e3b1ea0e8b2175c26f_8.jpg"><img class="image" src="http://distilleryimage5.s3.amazonaws.com/bab1fd24a64511e3bcdb12d309462119_8.jpg"><img class="image" src="http://distilleryimage8.s3.amazonaws.com/8e030fdea64511e3b0c612c8413ba65c_8.jpg"><img class="image" src="http://distilleryimage7.s3.amazonaws.com/8c7a2bd477ba11e39dee0a96b9fbd9bb_8.jpg">
+	<div id="main" class="layout1">
 
 	</div>
 </body>
