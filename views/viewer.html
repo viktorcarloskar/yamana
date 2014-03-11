@@ -82,7 +82,9 @@
 
 		var img = newImage(col, image)
 		addImgHtml(img);
-		slideDown(col);
+		setTimeout(function() {
+			slideDown(col)
+		},500);
 	}
 
 	function slideDown(col, img) {
