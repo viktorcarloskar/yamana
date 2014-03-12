@@ -330,19 +330,18 @@ footer {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 95%;
+  padding: 35% 0 6% 0;
   max-height: 800px;
   overflow: hidden;
   color: #fafafa;
 }
+#home .one .container {
+  height: 100%;
+}
 #home .one .left {
-  position: relative;
   overflow: hidden;
   width: 60%;
   height: 100%;
-}
-#home .one .left > div {
-  margin-top: 50%;
 }
 #home .one .right {
   width: 40%;
@@ -404,6 +403,7 @@ footer {
   margin-left: 3%;
   margin-top: 5%;
   top: 0;
+  left: 0;
 }
 #home #flash {
   position: fixed;

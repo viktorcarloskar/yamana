@@ -127,7 +127,7 @@ module.exports = function(app, passport, server, io) {
 			socket.on('disconnect', function() {
 				controllers.viewer.closedConn(socket);
 			});
-		}
+		} 
 		else
 			socket.disconnect();
 	});
