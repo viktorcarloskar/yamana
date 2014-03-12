@@ -175,6 +175,19 @@ body,
 html {
   height: 100%;
 }
+html {
+  font-size: 100%;
+}
+@media only screen and (min-width: 720px) and (max-width: 959px) {
+  html {
+    font-size: 80%;
+  }
+}
+@media only screen and (max-width: 719px) {
+  html {
+    font-size: 70%;
+  }
+}
 body {
   color: #0f0f0f;
   background-color: #fafafa;
@@ -360,10 +373,15 @@ footer {
   margin: 5% 15% 5% 5%;
 }
 #home .two .left #great-things ul li {
+  position: relative;
   margin-bottom: 6%;
   overflow: hidden;
+  padding: 0 0 0 12%;
 }
 #home .two .left #great-things ul li i {
+  position: absolute;
+  top: 0;
+  left: 0;
   font-size: 1.6rem;
   padding-top: 3px;
   width: 10%;
@@ -404,6 +422,18 @@ footer {
   margin-top: 5%;
   top: 0;
   left: 0;
+}
+@media only screen and (max-width: 719px) {
+  #home .two .left {
+    width: 100%;
+  }
+  #home .two .left #great-things {
+    width: 96%;
+    margin: 2%;
+  }
+  #home .two .right {
+    width: 100%;
+  }
 }
 #home #flash {
   position: fixed;
