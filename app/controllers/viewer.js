@@ -15,13 +15,11 @@ var clients = [];
 
 module.exports = {
 	userViewers: function(req, res, next) {
-		console.log();
 		req.models.viewers.find({user_id: req.user.id}, function(err, viewers) {
 			if (err)
 				throw err;
 			hashIds(viewers, function(result) {
 				res.render('dashboard', {title: 'YAMANA - Dashboard', viewers: result});
-				console.log(result);
 			})
 			// addImages(viewers, function(err, data) {
 			// 	console.log(data);
@@ -29,6 +27,9 @@ module.exports = {
 			// });
 
 		})
+	},
+	addViewer: function(req, res, next) {
+
 	},
 	startSubscription: function(req, res, next) {
 
