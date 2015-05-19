@@ -110,13 +110,13 @@ module.exports = function(app, passport, server, io) {
 	// CALLBACK INSTAGRAM
 	// =================================
 	app.get('/callback/instagram/', controllers.viewer.igHandshake);
-	app.post('/callback/instagram/:id', controllers.viewer.igHandshake);
+	app.post('/callback/instagram/:id/', controllers.viewer.igHandshake);
 
 	// =================================
 	// CALLBACK INSTAGRAM
 	// =================================
 	app.post('/callback/instagram/', controllers.viewer.igPost);
-	app.post('/callback/instagram/:id', controllers.viewer.igPost);
+	app.post('/callback/instagram/:id/', controllers.viewer.igPost);
 
 	// =================================
 	// VIEWER PAGE
