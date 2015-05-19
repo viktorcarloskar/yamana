@@ -72,7 +72,7 @@ module.exports = {
 		// Handle if viewer has had images pushed before
 		var lastId;
 		if (data.lastId) 
-			lastId = data.lastId; 
+			lastId = data.min_id; 
 		else 
 			lastId = null;
 
@@ -128,11 +128,12 @@ module.exports = {
 				console.log('Is this the same? %s == %s', client.hashtag, hashtag);
 				if (client.hashtag.toLowerCase() == hashtag.toLowerCase()) {
 					console.log('Min_id: %s', client.min_id);
+					lastId = client.min_id;
 					getRecent(tag.object_id, client.min_id, function(data, pagination) {
 						console.log('Data is %s long', data.length);
 						if (data.length > 0) {
 							images = data;
-							client.socket.emit('instagram', images);
+							client.socket.emit('instagram', {images: images, min_id: lastId});
 							console.log('Sent data to client:');
 							console.log(images);
 							// Find socket and set min id to get next time
