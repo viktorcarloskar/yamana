@@ -120,7 +120,7 @@ module.exports = {
 				if (i.socket.id == socketId)
 					return i;
 			})
-			console.log("clients found with id %s : %s", obj.subscription_id, client.length)
+			console.log("clients found with id %s : %s", socketId, client.length)
 			client = client[0]
 
 			if (client) {
@@ -134,7 +134,7 @@ module.exports = {
 				})	
 			}
 			else {
-				ig.subscriptions.unsubscribe({id: obj});
+				ig.subscriptions.unsubscribe({id: obj.subscription_id});
 				console.log('Unsubscribed subscription: ' + obj.id);
 			}
 			
