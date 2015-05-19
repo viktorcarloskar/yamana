@@ -90,9 +90,10 @@ module.exports = {
 									// Save socket for sending updates
 									clients.push({socket: socket, min_id: pagination.min_tag_id, hashtag: viewer.hashtag});
 
-									console.log("Added client: " + clients)
+									console.log("Added client: " + socket.id)
 									// Start subscription of images
-									ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/'), id: socket.id});
+									var response = ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/'), id: socket.id});
+									console.log("Ig sub response: " + response)
 								})
 						});
 				});
@@ -111,7 +112,7 @@ module.exports = {
 		console.log(data);
 
 		data.forEach(function(obj) {
-			
+
 			var client = clients.filter(function(i) {
 				if (i.socket.id == obj.id)
 					return i;
@@ -120,6 +121,7 @@ module.exports = {
 			if (client) {
 				getRecent(obj.object_id, client.min_id, function(data, pagination) {
 					console.log('Data is %s long', data.length);
+					console.log('Client is %s ', client);
 					if (data.length > 0) {
 						images = data;
 						client.socket.emit('instagram', {images: images, min_id: client.min_id});
