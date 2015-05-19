@@ -131,12 +131,16 @@ module.exports = {
 							images = data;
 							client.socket.emit('instagram', {images: images, min_id: client.min_id});
 							setMinId(client, pagination);
+							res.send(200)
 						}
+						else 
+							res.send(201)
 					})	
 				}
 				else {
 					ig.subscriptions.unsubscribe({id: obj.subscription_id});
 					console.log('Unsubscribed subscription: ' + obj.id);
+					res.send(200)
 				}
 				
 				/*
