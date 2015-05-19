@@ -90,6 +90,7 @@ module.exports = {
 									// Save socket for sending updates
 									clients.push({socket: socket, min_id: pagination.min_tag_id, hashtag: viewer.hashtag});
 
+									console.log("Added client: " + clients)
 									// Start subscription of images
 									ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/')});
 								})
@@ -118,7 +119,7 @@ module.exports = {
 			var images = null;
 			var hashtag = tag.object_id;
 
-			console.log(tasksToGo);
+			console.log("Tasks to go:" + tasksToGo);
 
 			// Loops all connected clients to know wich one to send to
 			clients.forEach(function(client) {
