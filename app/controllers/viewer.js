@@ -113,15 +113,16 @@ module.exports = {
 
 		data.forEach(function(obj) {
 
-			var client = clients.filter(function(i) {
+			var client;
+			
+			client = clients.filter(function(i) {
 				if (i.socket.id == obj.id)
 					return i;
 			})
 
-			if (client) {
+			if (client.socket) {
 				getRecent(obj.object_id, client.min_id, function(data, pagination) {
 					console.log('Data is %s long', data.length);
-					console.log('Client is %s ', client);
 					if (data.length > 0) {
 						images = data;
 						client.socket.emit('instagram', {images: images, min_id: client.min_id});
