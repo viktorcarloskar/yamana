@@ -112,69 +112,71 @@ module.exports = {
 		var socketId = req.params.id
 		console.log(data);
 
-		data.forEach(function(obj) {
+		if (data) {
+			data.forEach(function(obj) {
 
-			var client;
-			
-			client = clients.filter(function(i) {
-				if (i.socket.id == socketId)
-					return i;
-			})
-			console.log("clients found with id %s : %s", socketId, client.length)
-			client = client[0]
+				var client;
+				
+				client = clients.filter(function(i) {
+					if (i.socket.id == socketId)
+						return i;
+				})
+				console.log("clients found with id %s : %s", socketId, client.length)
+				client = client[0]
 
-			if (client) {
-				getRecent(obj.object_id, client.min_id, function(data, pagination) {
-					console.log('Data is %s long', data.length);
-					if (data.length > 0) {
-						images = data;
-						client.socket.emit('instagram', {images: images, min_id: client.min_id});
-						setMinId(client, pagination);
-					}
-				})	
-			}
-			else {
-				ig.subscriptions.unsubscribe({id: obj.subscription_id});
-				console.log('Unsubscribed subscription: ' + obj.id);
-			}
-			
-			/*
-			console.log(tag);
-			// Async fix variables
-			var tasksToGo = clients.length;
-			var sentData = false;
-			var images = null;
-			var hashtag = tag.object_id;
-
-			console.log("Tasks to go:" + tasksToGo);
-
-			// Loops all connected clients to know wich one to send to
-			clients.forEach(function(client) {
-				console.log('Client: %s, %s', client.socket.id, client.hashtag);
-				// Yeah, a bit ineffective BUT only IF two clients is subscribing to
-				// the same hashtag
-				console.log('Is this the same? %s == %s', client.hashtag, hashtag);
-				if (client.hashtag.toLowerCase() == hashtag.toLowerCase()) {
-					console.log('Min_id: %s', client.min_id);
-					getRecent(tag.object_id, client.min_id, function(data, pagination) {
+				if (client) {
+					getRecent(obj.object_id, client.min_id, function(data, pagination) {
 						console.log('Data is %s long', data.length);
 						if (data.length > 0) {
 							images = data;
 							client.socket.emit('instagram', {images: images, min_id: client.min_id});
-							console.log('Sent data to client:');
-							console.log(images);
-							// Find socket and set min id to get next time
 							setMinId(client, pagination);
 						}
-						sentData = true;
-					})
+					})	
 				}
-				if (--tasksToGo === 0 && !sentData) {
-					ig.subscriptions.unsubscribe({id: client.socket.id});
-					console.log('Subscription not attached to socket');
+				else {
+					ig.subscriptions.unsubscribe({id: obj.subscription_id});
+					console.log('Unsubscribed subscription: ' + obj.id);
 				}
-			})
-*/
+				
+				/*
+				console.log(tag);
+				// Async fix variables
+				var tasksToGo = clients.length;
+				var sentData = false;
+				var images = null;
+				var hashtag = tag.object_id;
+
+				console.log("Tasks to go:" + tasksToGo);
+
+				// Loops all connected clients to know wich one to send to
+				clients.forEach(function(client) {
+					console.log('Client: %s, %s', client.socket.id, client.hashtag);
+					// Yeah, a bit ineffective BUT only IF two clients is subscribing to
+					// the same hashtag
+					console.log('Is this the same? %s == %s', client.hashtag, hashtag);
+					if (client.hashtag.toLowerCase() == hashtag.toLowerCase()) {
+						console.log('Min_id: %s', client.min_id);
+						getRecent(tag.object_id, client.min_id, function(data, pagination) {
+							console.log('Data is %s long', data.length);
+							if (data.length > 0) {
+								images = data;
+								client.socket.emit('instagram', {images: images, min_id: client.min_id});
+								console.log('Sent data to client:');
+								console.log(images);
+								// Find socket and set min id to get next time
+								setMinId(client, pagination);
+							}
+							sentData = true;
+						})
+					}
+					if (--tasksToGo === 0 && !sentData) {
+						ig.subscriptions.unsubscribe({id: client.socket.id});
+						console.log('Subscription not attached to socket');
+					}
+				})
+*/			
+			}
 		});
 	},
 
