@@ -21,7 +21,7 @@
 	var min_id; 
 
 	var socket;
-	if (window.location.contains("localhost")) 
+	if (window.location.indexOf("localhost") < 0) 
 		io.connect('http://localhost:5000');
 	else
 		socket = io.connect('http://yamana.herokuapp.com');

@@ -71,9 +71,9 @@ module.exports = {
 		
 		// Handle if viewer has had images pushed before
 		var lastId;
-		if (data.lastId) 
-			lastId = data.min_id; 
-		else 
+		if (data.min_id) 
+			lastId = min_id;
+		else
 			lastId = null;
 
 		//Send recent images
@@ -128,7 +128,6 @@ module.exports = {
 				console.log('Is this the same? %s == %s', client.hashtag, hashtag);
 				if (client.hashtag.toLowerCase() == hashtag.toLowerCase()) {
 					console.log('Min_id: %s', client.min_id);
-					lastId = client.min_id;
 					getRecent(tag.object_id, client.min_id, function(data, pagination) {
 						console.log('Data is %s long', data.length);
 						if (data.length > 0) {
