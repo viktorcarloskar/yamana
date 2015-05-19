@@ -18,9 +18,16 @@
 		4: false
 	}
 
-	var socket = io.connect('http://yamana.herokuapp.com');
+	var lastId; 
+
+	var socket;
+	if (window.location.contains("localhost")) 
+		io.connect('http://localhost:5000');
+	else
+		socket = io.connect('http://yamana.herokuapp.com');
+
 	socket.on('conn', function (data) {
-		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1]});
+		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1], lastId: lastId});
 	});
 	socket.on('instagram', function (data) {
 		var main = document.getElementById('main');
@@ -28,8 +35,8 @@
 		console.log(data);
 
 		var sorted = data.sort(function(a, b){
-        return parseInt(a.id) - parseInt(b.id);
-    });
+	        return parseInt(a.id) - parseInt(b.id);
+	    });
 
 		showImages(sorted);
 	});

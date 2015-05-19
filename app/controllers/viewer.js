@@ -14,6 +14,10 @@ ig.set('maxSockets', 10);
 var clients = [];
 
 module.exports = {
+
+	
+	// dashboard.html load function.
+	// Loads all the viewers for the logged in user
 	userViewers: function(req, res, next) {
 		req.models.viewers.find({user_id: req.user.id}, function(err, viewers) {
 			if (err)
@@ -28,12 +32,15 @@ module.exports = {
 
 		})
 	},
-	addViewer: function(req, res, next) {
 
+	addViewer: function(req, res, next) {
+		//req.models.viewers.add()
 	},
 	startSubscription: function(req, res, next) {
 
 	},
+	
+	// viewer.html init function
 	getViewer: function(req, res, next) {
 		var viewerId = hashids.decrypt(req.param('id'));
 
@@ -45,10 +52,30 @@ module.exports = {
 			res.render('viewer', {layout: false});
 		})
 	},
+	newViewer: function(req, res, next) {
+		var viewer = req.body.viewer;
+		createViewer(req, res, viewer, function(err, result) {
+			res.render('dashboard');
+		})
+	},
+
+	
+	// On new websocket connection
 	newConn: function(socket) {
 		return true;
 	},
+
+	// On websocket 'fetch' call
+	// Saves the socket connection, sends the latest instagram images and starts a subscription at instagram
 	init: function(socket, data) {
+		
+		// Handle if viewer has had images pushed before
+		var lastId;
+		if (data.lastId) 
+			lastId = data.lastId; 
+		else 
+			lastId = null;
+
 		//Send recent images
 		var viewerId;
 		if (data.var) {
@@ -57,7 +84,7 @@ module.exports = {
 						if (err) return next(err);
 
 						db.models.viewers.get(viewerId, function(err, viewer) {
-								getRecent(viewer.hashtag, null, function(images, pagination) {
+								getRecent(viewer.hashtag, lastId, function(images, pagination) {
 									socket.emit('instagram', images);
 
 									// Save socket for sending updates
@@ -133,6 +160,8 @@ module.exports = {
 	}
 }
 
+// Function for fetching instagram images
+// Returns nothing, uses callback with instagram data and pagination.
 function getRecent(tagName, min_id, next) {
 	if (min_id) {
 			ig.tags.recent({name: tagName, min_tag_id: min_id, complete: function(data, pagination) {
@@ -145,12 +174,15 @@ function getRecent(tagName, min_id, next) {
 			}});
 	}
 }
+// Function for setting the minId in the client object
 function setMinId(client, data){
 		client.min_id = data.min_tag_id;
 }
+// Function for setting the hashtag value in the client object
 function setHashtag(client, hashtag){
 		client.hashtag = hashtag;
 }
+// 
 function addImages(viewers, callback) {
 	var jsonViewers = {viewers: []};
 	var j = 0;
@@ -171,6 +203,7 @@ function addImages(viewers, callback) {
 			callback(null, jsonViewers);
 	}
 }
+// Function that hashes all the ids of the viewers and sets the datetimes to more readable units
 function hashIds(viewers, callback) {
 	var res = []
 	var tasksToGo = viewers.length;
@@ -188,4 +221,32 @@ function hashIds(viewers, callback) {
 				callback(res);
 		})
 	}
+}
+
+// Function for adding a new viewer
+function createViewer(req, res, viewer, callback) {
+	var insert = {}; 
+	
+	// Validations
+	// Validating that hashtag var doesn't contain a #
+	if (viewer.hashtag.indexOf('#') === -1) {
+		viewer.hashtag = viewer.hashtag.substring(1, viewer.hashtag.length)
+	};
+	// Validating user
+	models(function (err, db) {
+		db.models.users.get({id: req.user.id}, function(err, user) {
+			if(err) {
+				throw err;
+			}
+			insert.hashtag = viewer.hashtag;
+			insert.user_id = user.id;
+			db.models.viewers.create(insert, function(err, results) {
+				if (err) 
+					throw err;
+				console.log(results);
+				callback(err, result);
+			})
+		})
+	})
+
 }
