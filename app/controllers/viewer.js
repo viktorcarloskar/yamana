@@ -175,9 +175,9 @@ module.exports = {
 						console.log('Subscription not attached to socket');
 					}
 				})
-*/			
-			}
-		});
+				*/
+			});
+		}
 	},
 
 	// If connection to client is terminated
