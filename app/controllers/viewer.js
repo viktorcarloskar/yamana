@@ -72,7 +72,7 @@ module.exports = {
 		// Handle if viewer has had images pushed before
 		var lastId;
 		if (data.min_id) 
-			lastId = min_id;
+			lastId = data.min_id;
 		else
 			lastId = null;
 
