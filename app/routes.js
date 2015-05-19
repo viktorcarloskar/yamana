@@ -57,6 +57,12 @@ module.exports = function(app, passport, server, io) {
 	// DASHBOARD
 	// =================================
 	app.get('/dashboard', isLoggedIn, controllers.viewer.userViewers);
+
+	// =================================
+	// CREATE NEW VIEWER 
+	// =================================
+	app.post('/dashboard/create', isLoggedIn, controllers.viewer.newViewer);
+
 	// =================================
 	// SETTINGS
 	// =================================
@@ -103,11 +109,13 @@ module.exports = function(app, passport, server, io) {
 	// =================================
 	// CALLBACK INSTAGRAM
 	// =================================
+	app.post('/callback/instagram/:id', controllers.viewer.igHandshake);
 	app.get('/callback/instagram/', controllers.viewer.igHandshake);
 
 	// =================================
 	// CALLBACK INSTAGRAM
 	// =================================
+	app.post('/callback/instagram/:id', controllers.viewer.igPost);
 	app.post('/callback/instagram/', controllers.viewer.igPost);
 
 	// =================================
