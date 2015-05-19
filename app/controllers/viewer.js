@@ -119,8 +119,10 @@ module.exports = {
 				if (i.socket.id == obj.id)
 					return i;
 			})
+			console.log("clients found with id %s : %s", obj.id, client.length)
+			client = client[0]
 
-			if (client.socket) {
+			if (client) {
 				getRecent(obj.object_id, client.min_id, function(data, pagination) {
 					console.log('Data is %s long', data.length);
 					if (data.length > 0) {
