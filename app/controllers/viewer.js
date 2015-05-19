@@ -92,7 +92,7 @@ module.exports = {
 
 									console.log("Added client: " + clients)
 									// Start subscription of images
-									ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/')});
+									ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/'), id: socket.id});
 								})
 						});
 				});
@@ -110,8 +110,29 @@ module.exports = {
 		var data = req.body;
 		console.log(data);
 
-		data.forEach(function(tag) {
+		data.forEach(function(obj) {
+			
+			var client = clients.filter(function(i) {
+				if (i.socket.id == obj.id)
+					return i;
+			})
 
+			if (client) {
+				getRecent(obj.object_id, client.min_id, function(data, pagination) {
+					console.log('Data is %s long', data.length);
+					if (data.length > 0) {
+						images = data;
+						client.socket.emit('instagram', {images: images, min_id: client.min_id});
+						setMinId(client, pagination);
+					}
+				})	
+			}
+			else {
+				ig.subscriptions.unsubscribe({id: client.socket.id});
+				console.log('Unsubscribed subscription: ' + client.socket.id);
+			}
+			
+			/*
 			console.log(tag);
 			// Async fix variables
 			var tasksToGo = clients.length;
@@ -133,7 +154,7 @@ module.exports = {
 						console.log('Data is %s long', data.length);
 						if (data.length > 0) {
 							images = data;
-							client.socket.emit('instagram', {images: images, min_id: lastId});
+							client.socket.emit('instagram', {images: images, min_id: client.min_id});
 							console.log('Sent data to client:');
 							console.log(images);
 							// Find socket and set min id to get next time
@@ -143,10 +164,11 @@ module.exports = {
 					})
 				}
 				if (--tasksToGo === 0 && !sentData) {
-					ig.subscriptions.unsubscribe({id: tag.id});
+					ig.subscriptions.unsubscribe({id: client.socket.id});
 					console.log('Subscription not attached to socket');
 				}
 			})
+*/
 		});
 	},
 
