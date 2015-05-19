@@ -92,7 +92,7 @@ module.exports = {
 
 									console.log("Added client: " + socket.id)
 									// Start subscription of images
-									var response = ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/'), id: socket.id});
+									var response = ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id)});
 									console.log("Ig sub response: " + response)
 								})
 						});
@@ -109,6 +109,7 @@ module.exports = {
 	igPost: function(req, res) {
 		//The raw data from instagram
 		var data = req.body;
+		var socketId = req.params.id
 		console.log(data);
 
 		data.forEach(function(obj) {
@@ -116,10 +117,10 @@ module.exports = {
 			var client;
 			
 			client = clients.filter(function(i) {
-				if (i.socket.id == obj.id)
+				if (i.socket.id == socketId)
 					return i;
 			})
-			console.log("clients found with id %s : %s", obj.id, client.length)
+			console.log("clients found with id %s : %s", obj.subscription_id, client.length)
 			client = client[0]
 
 			if (client) {
@@ -133,8 +134,8 @@ module.exports = {
 				})	
 			}
 			else {
-				ig.subscriptions.unsubscribe({id: client.socket.id});
-				console.log('Unsubscribed subscription: ' + client.socket.id);
+				ig.subscriptions.unsubscribe({id: obj});
+				console.log('Unsubscribed subscription: ' + obj.id);
 			}
 			
 			/*
