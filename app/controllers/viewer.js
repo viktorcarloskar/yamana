@@ -85,7 +85,7 @@ module.exports = {
 
 						db.models.viewers.get(viewerId, function(err, viewer) {
 								getRecent(viewer.hashtag, lastId, function(images, pagination) {
-									socket.emit('instagram', images);
+									socket.emit('instagram', {images: images, min_id: lastId});
 
 									// Save socket for sending updates
 									clients.push({socket: socket, min_id: pagination.min_tag_id, hashtag: viewer.hashtag});
