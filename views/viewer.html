@@ -39,6 +39,9 @@
 
 		showImages(sorted);
 	});
+	socket.on('twitter', function(data) {
+		addTweet(data)
+	})
 	function showImages(sorted) {
 		var i = 0;
 		var interval = setInterval(function() {
@@ -101,6 +104,9 @@
 		setTimeout(function() {
 			slideDown(col)
 		},200);
+	}
+	function addTweet(tweet) {
+		console.log("TWEET LITTLE BIRD")
 	}
 
 	function slideDown(col, img) {
