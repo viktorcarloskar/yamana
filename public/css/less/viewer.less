@@ -1,6 +1,8 @@
 @import "mixins.less";
 
 @color-white: #Fafafa;
+@color-black: #0f0f0f;
+@color-twitter: #55acee;
 
 @font-face {
   font-family: 'proxima_nova';
@@ -22,12 +24,16 @@ body {
   overflow: hidden;
 
 }
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
 #flash {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
   #controls {
     top: 20%;
     width: 40%;
@@ -68,21 +74,56 @@ body {
 }
 .layout1 {
   .image {
-    position: absolute;
-    width: 25%;
+    width: 100%;
+    float: left;
+    display: block;
     .transition(all 500ms ease-in-out);
   }
-  .col1 {
-    left: 0;
+  .tweet {
+    padding: 10px;
+    width: 100%;
+    background: @color-black;
+    color: @color-white;
+    float: left;
+    display: block;
+    .transition(all 500ms ease-in-out);
+
+    .profile {
+      float: left;
+      width: 100%;
+      height: 45px;
+      img {
+        float: left;
+        height: 100%;
+        width: 45px;
+       }
+       >div {
+        float: left;
+        width: ~"calc(100% - 45px)";
+        padding-left: 10px;
+        font-size: 1.6rem;
+        line-height: 45px;
+       }
+       clear: both;
+    }
+    .tweet-text {
+      padding-top: 10px;
+      float: left;
+      width: 100%;
+      .text {
+        font-size: 2.8rem;
+      }
+      .date {
+
+      }
+    }
   }
-  .col2 {
-    left: 25%;
+  .show {
+    margin-bottom: 0 !important;
   }
-  .col3 {
-    left: 50%;
-  }
-  .col4 {
-    left: 75%;
+  .col {
+    width: 25%;
+    float: left;
   }
 }
 .layout2 {

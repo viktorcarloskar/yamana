@@ -101,7 +101,6 @@ module.exports = {
 					})
 
 					// Twitter stream if twitter activated
-					console.log("Show twitter: " + db_viewer.show_twitter)
 					if (db_viewer.show_twitter) {
 						var twitter = new Twitter({
 							consumer_key: settings.twitter.consumer_key,
@@ -111,11 +110,9 @@ module.exports = {
 						})
 
 						viewer.twitter = twitter;
-						console.log("Added twitter")
 
 						twitter.stream('statuses/filter', {track: '#' + db_viewer.hashtag}, function(stream) {
 							stream.on('data', function (tweet) {
-								console.log("DETECTED TWEET")
 								viewer.socket.emit('twitter', {tweet: tweet});
 							})
 							stream.on('error', function (error) {

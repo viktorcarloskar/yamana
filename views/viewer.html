@@ -40,7 +40,11 @@
 		showImages(sorted);
 	});
 	socket.on('twitter', function(data) {
-		addTweet(data)
+		var tweets = data.args
+
+		for (var i = 0; i < tweets.length; i++) {
+			addTweet(tweets[i].tweet)
+		};
 	})
 	function showImages(sorted) {
 		var i = 0;
@@ -54,6 +58,7 @@
 	}
 	function addFakeImage() {
 		var image = {
+			type: 'image',
 			images: {
 				standard_resolution: {
 					url: 'http://distilleryimage9.s3.amazonaws.com/3c62dff0a90211e38c92125e9fe3ffd9_8.jpg'
@@ -62,22 +67,109 @@
 		}
 		addImage(image);
 	}
-
-	function newImage(col, image) {
-		var imgHeight = getImgHeight();
-		if (image.type == 'video') {
-			var html = '<video class="image col' + col + '" style="top: -' + imgHeight + 'px;" autoplay loop muted>'
-			 + '<source src="' + image.videos.standard_resolution.url + '" type="video/mp4">'
-			 + '<img src="' + image.images.standard_resolution.url + '">'
-			 + '</video>'
+	function addFakeTweet() {
+		var tweet = {
+			created_at:"Thu May 21 20:17:58 +0000 2015",
+			text: "So version 2 is soon out. Coolio! #yamana2",
+			user: {
+				screen_name: "Yamana_app",
+				profile_image_url:"http://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png"
+			}
 		}
-		else {
-			var html = '<img class="image col' + col + '" style="top: -' + imgHeight + 'px;" src="' + image.images.standard_resolution.url + '">'
-		}
-		return html;
+		addTweet(tweet);
 	}
 
 	function addImage(image) {
+		var col = getCol();
+		var img = newImage(image)
+		addImageToDiv(col, img);
+		setTimeout(function() {
+			img.classList.add('show')
+		},400);
+	}
+	function addTweet(tweet) {
+		var col = getCol();
+		var tweetElem = newTweet(tweet)
+		addTweetToDiv(col, tweetElem)
+
+		setTimeout(function() {
+			tweetElem.classList.add('show')
+		},400);
+	}	
+
+	function newImage(image) {
+		var elem;
+
+		if (image.type == 'video') {
+			 elem = document.createElement('video');
+			 var source = document.createElement('source');
+			 var img    = document.createElement('img');
+
+			 source.src = image.videos.standard_resolution.url
+			 img.src = image.images.standard_resolution.url
+
+			 elem.appendChild(source)
+			 elem.appendChild(img)
+			 elem.autoplay = true
+			 elem.loop = true
+			 elem.muted = true
+		}
+		else {
+			elem = document.createElement('img');
+			elem.src = image.images.standard_resolution.url
+		}
+
+		elem.classList.add('image')
+
+		return elem;
+	}
+	function newTweet(tweet) {
+		var elem;
+
+		elem = document.createElement('div')
+		var profile = document.createElement('div')
+			var image = document.createElement('img')
+			var handle = document.createElement('div')
+		var tweetText = document.createElement('div')
+			var text = document.createElement('div')
+			var date = document.createElement('div')
+
+		image.src = tweet.user.profile_image_url
+		handle.textContent = '@' + tweet.user.screen_name
+
+		profile.classList.add('profile')
+		profile.appendChild(image)
+		profile.appendChild(handle)
+
+		text.textContent = tweet.text
+		date.textContent = tweet.created_at
+
+		tweetText.classList.add('tweet-text')
+		text.classList.add('text')
+		date.classList.add('date')
+		tweetText.appendChild(text)
+		tweetText.appendChild(date)
+
+		elem.appendChild(profile)
+		elem.appendChild(tweetText)
+
+		elem.classList.add('tweet')
+
+		return elem
+	}
+
+	function addImageToDiv(col, img) {
+		var div = document.getElementById('col' + col)
+		img.style.marginBottom = "-" + div.offsetWidth + "px"
+		div.insertBefore(img, div.firstChild)
+	}
+	function addTweetToDiv(col, tweet) {
+		var div = document.getElementById('col' + col)
+		tweet.style.marginBottom = "-" + 100 + "%"
+		div.insertBefore(tweet, div.firstChild)
+	}
+
+	function getCol() {
 		var col = (Math.floor(Math.random() * columns) + 1)
 		var i = 0;
 		while (cols[col] && i < columns) {
@@ -98,42 +190,7 @@
 		else {
 			cols[col] = true;
 		}
-
-		var img = newImage(col, image)
-		addImgHtml(img);
-		setTimeout(function() {
-			slideDown(col)
-		},200);
-	}
-	function addTweet(tweet) {
-		console.log("TWEET LITTLE BIRD")
-	}
-
-	function slideDown(col, img) {
-		var colClass = '.col' + col;
-		var imgs = document.querySelectorAll(colClass);
-		for (var i = 0; i < imgs.length; i++) {
-			var topVal = (parseInt(imgs[i].style.top, 10) + getImgHeight()) + 'px'
-			imgs[i].style.top = topVal;
-		}
-	}
-	function addImgHtml(img) {
-		var main = document.getElementById('main');
-		main.innerHTML = img + main.innerHTML;
-	}
-	function getImgHeight() {
-		var images = document.querySelectorAll('.image');
-		var val = Math.floor(Math.random() * images.length)
-
-		var image = images[val]
-		if (image && image.clientHeight > 0) {
-			return Math.floor(image.clientHeight);
-		}
-		else
-			return (window.innerWidth / 4)
-	}
-	function setImgHeight() {
-
+		return col
 	}
 
 	function init() {
@@ -189,7 +246,10 @@
 		DAS FAKE IMG
 	</div>
 	<div id="main" class="layout1">
-
+		<div class="col" id="col1"></div>
+		<div class="col" id="col2"></div>
+		<div class="col" id="col3"></div>
+		<div class="col" id="col4"></div>
 	</div>
 </body>
 </html>
