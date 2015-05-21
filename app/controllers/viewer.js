@@ -119,7 +119,8 @@ module.exports = {
 								viewer.socket.emit('twitter', {tweet: tweet});
 							})
 							stream.on('error', function (error) {
-
+								console.log("DETECTED Twitter error: ")
+								console.log(error)
 							})
 						})
 					};
