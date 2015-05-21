@@ -40,11 +40,8 @@
 		showImages(sorted);
 	});
 	socket.on('twitter', function(data) {
-		var tweets = data.args
-
-		for (var i = 0; i < tweets.length; i++) {
-			addTweet(tweets[i].tweet)
-		};
+		var tweet = data.tweet
+		addTweet(tweet)
 	})
 	function showImages(sorted) {
 		var i = 0;
