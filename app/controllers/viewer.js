@@ -1,10 +1,11 @@
-var ig 		   = require('instagram-node-lib');
+
+var Twitter   = require('twitter');
+var ig 		  = require('instagram-node-lib');
 var settings  = require('../../config/settings')
 var models    = require('../models/');
 var Hashids   = require('hashids'),
-	hashids     = new Hashids('mmmbophashhansonmmmbopanderzfavoriter', 10);
+	hashids   = new Hashids('mmmbophashhansonmmmbopanderzfavoriter', 10);
 var moment    = require('moment');
-
 
 ig.set('client_id', settings.instagram.client_id);
 ig.set('client_secret', settings.instagram.client_secret);
@@ -29,7 +30,6 @@ module.exports = {
 			// 	console.log(data);
 			// 	res.render('dashboard', {title: 'YAMANA - Dashboard', viewers: data.viewers});
 			// });
-
 		})
 	},
 
@@ -70,33 +70,58 @@ module.exports = {
 	init: function(socket, data) {
 		
 		// Handle if viewer has had images pushed before
-		var lastId;
-		if (data.min_id) 
-			lastId = data.min_id;
+		var min_id_instagram;
+		
+		if (data.min_id_instagram) 
+			min_id_instagram = data.min_id_instagram;
 		else
-			lastId = null;
+			min_id_instagram = null;
 
+		var viewer = new Viewer(socket)
+		clients.push(viewer)
 		//Send recent images
 		var viewerId;
 		if (data.var) {
-				viewerId = hashids.decrypt(data.var);
-				models(function (err, db) {
-						if (err) return next(err);
+			viewerId = hashids.decrypt(data.var);
+			models(function (err, db) {
+				if (err) return next(err);
 
-						db.models.viewers.get(viewerId, function(err, viewer) {
-								getRecent(viewer.hashtag, lastId, function(images, pagination) {
-									socket.emit('instagram', {images: images, min_id: lastId});
+				db.models.viewers.get(viewerId, function(err, db_viewer) {
+					getRecentInstagrams(db_viewer.hashtag, min_id_instagram, function(images, pagination) {
+						viewer.socket.emit('instagram', {images: images, min_id: pagination.min_tag_id});
 
-									// Save socket for sending updates
-									clients.push({socket: socket, min_id: pagination.min_tag_id, hashtag: viewer.hashtag});
+						// Save socket for sending updates
+						//clients.push({socket: socket, min_id_instagram: pagination.min_tag_id, hashtag: viewer.hashtag});
+						viewer.min_id_instagram = min_id_instagram
+						viewer.hashtag          = db_viewer.hashtag
 
-									console.log("Added client: " + socket.id)
-									// Start subscription of images
-									var response = ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id)});
-									console.log("Ig sub response: " + response)
-								})
-						});
+						console.log("Added client: " + socket.id)
+						// Start subscription of images
+						ig.tags.subscribe({ object_id: viewer.hashtag, callback_url: (settings.instagram.callback_url + '/' + socket.id)});
+					})
+
+					// Twitter stream if twitter activated
+					if (db_viewer.show_twitter) {
+						var twitter = new Twitter({
+							consumer_key: settings.twitter.consumer_key,
+						  	consumer_secret: settings.twitter.consumer_secret,
+						  	access_token_key: settings.twitter.access_token_key,
+						  	access_token_secret: settings.twitter.access_token_secret
+						})
+
+						viewer.twitter = twitter;
+
+						twitter.stream('statuses/filter', {track: '#' + db_viewer.hashtag}, function(stream) {
+							stream.on('data', function (tweet) {
+								viewer.socket.emit('twitter', {tweet: tweet});
+							})
+							stream.on('error', function (error) {
+
+							})
+						})
+					};
 				});
+			});
 		}
 	},
 
@@ -125,11 +150,11 @@ module.exports = {
 				client = client[0]
 
 				if (client) {
-					getRecent(obj.object_id, client.min_id, function(data, pagination) {
+					getRecentInstagrams(obj.object_id, client.min_id_instagram, function(data, pagination) {
 						console.log('Data is %s long', data.length);
 						if (data.length > 0) {
 							images = data;
-							client.socket.emit('instagram', {images: images, min_id: client.min_id});
+							client.socket.emit('instagram', {images: images, min_id_instagram: client.min_id_instagram});
 							setMinId(client, pagination);
 							res.send(200)
 						}
@@ -184,6 +209,7 @@ module.exports = {
 		}
 	},
 
+
 	// If connection to client is terminated
 	closedConn: function(socket) {
 		// This is terribly wrong
@@ -197,7 +223,7 @@ module.exports = {
 
 // Function for fetching instagram images
 // Returns nothing, uses callback with instagram data and pagination.
-function getRecent(tagName, min_id, next) {
+function getRecentInstagrams(tagName, min_id, next) {
 	if (min_id) {
 			ig.tags.recent({name: tagName, min_tag_id: min_id, complete: function(data, pagination) {
 				next(data, pagination);
@@ -209,35 +235,18 @@ function getRecent(tagName, min_id, next) {
 			}});
 	}
 }
+function getRecentTweets(tagname, min_id, next) {
+
+}
 // Function for setting the minId in the client object
 function setMinId(client, data){
-		client.min_id = data.min_tag_id;
+		client.min_id_instagram = data.min_tag_id;
 }
 // Function for setting the hashtag value in the client object
 function setHashtag(client, hashtag){
 		client.hashtag = hashtag;
 }
-// 
-function addImages(viewers, callback) {
-	var jsonViewers = {viewers: []};
-	var j = 0;
-	for (var i = 0; i < viewers.length; i++) {
-		getRecent(viewers[i].hashtag, 3, function(images) {
-			jsonViewers.viewers.push({
-				hashtag: viewers[j].hashtag,
-				created: viewers[j].created,
-				last_used: viewers[j].last_opened,
-				images: images
-			})
-			nextStep(i + 1);
-			j++;
-		});
-	};
-	function nextStep(i) {
-		if (i >= viewers.length)
-			callback(null, jsonViewers);
-	}
-}
+
 // Function that hashes all the ids of the viewers and sets the datetimes to more readable units
 function hashIds(viewers, callback) {
 	var res = []
@@ -285,3 +294,10 @@ function createViewer(req, res, viewer, callback) {
 	})
 
 }
+
+var Viewer = function (socket, min_instagram_id, twitterStream, hashtag) {
+	this.socket = socket;
+	this.min_instagram_id = min_instagram_id;
+	this.twitterStream = twitterStream;
+	this.hashtag = hashtag;
+};

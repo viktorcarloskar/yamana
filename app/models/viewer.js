@@ -5,11 +5,13 @@ var settings = require("../../config/settings.js");
 
 module.exports = function(orm, db) {
 	var viewer = db.define("viewers", {
-        hashtag     : String,
-        created     : Date,
-        last_opened : Date,
-        token       : String,
-        user_id     : String
+        hashtag       : String,
+        created       : Date,
+        last_opened   : Date,
+        token         : String,
+        user_id       : String,
+        show_twitter  : Boolean,
+        show_instagram: Boolean
     }, 
     {
         methods: {
