@@ -49,5 +49,12 @@ function initHomeCircles() {
 		}
 	}
 }
+function initNewViewer() {
+	var newViewerForm = document.querySelectorAll('.new_viewer')[0];
+	// Open
+	// Send to server
+		// Add new viewer
+	// Cancel
+}
 
 window.onload = init;

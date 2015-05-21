@@ -1,5 +1,8 @@
 // MIXINS 
-
+.center() {
+	margin-left: auto;
+	margin-right: auto;
+}
 .rounded-corners (@radius: 5px) {
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
@@ -55,4 +58,8 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+.home-svg-animation-delay(@step-time, @step, @column) {
+	@total-time: @step-time * @step + @step-time*((@column - 1)*4);
+	animation-delay: @total-time;
 }

@@ -18,12 +18,12 @@
 		4: false
 	}
 
-	var min_id; 
+	var min_id_instagram; 
 
 	var socket = io.connect('http://yamana.herokuapp.com');
 
 	socket.on('conn', function (data) {
-		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1], min_id: min_id});
+		socket.emit('fetch', {var: window.location.pathname.split( '/' )[window.location.pathname.split( '/' ).length - 1], min_id_instagram: min_id_instagram});
 	});
 	socket.on('instagram', function (data) {
 		var main = document.getElementById('main');
@@ -31,7 +31,7 @@
 		console.log(data);
 
 		var images = data.images;
-		min_id = data.min_id;
+		min_id_instagram = data.min_id_instagram;
 
 		var sorted = images.sort(function(a, b){
 	        return parseInt(a.id) - parseInt(b.id);
