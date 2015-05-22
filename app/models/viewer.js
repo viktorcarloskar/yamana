@@ -11,7 +11,8 @@ module.exports = function(orm, db) {
         token         : String,
         user_id       : String,
         show_twitter  : Boolean,
-        show_instagram: Boolean
+        show_instagram: Boolean,
+        show_ad       : Boolean
     }, 
     {
         methods: {

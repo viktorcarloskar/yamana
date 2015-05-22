@@ -49,7 +49,7 @@ module.exports = {
 				res.send(err);
 			if (result.user_id != req.user.id)
 				res.send('You do not have access to this viewer');
-			res.render('viewer', {layout: false});
+			res.render('viewer', {layout: false, viewer: result});
 		})
 	},
 	newViewer: function(req, res, next) {
@@ -117,7 +117,7 @@ module.exports = {
 							})
 							stream.on('error', function (error) {
 								console.log("DETECTED Twitter error: ")
-								console.log(error)
+								throw error
 							})
 						})
 					};

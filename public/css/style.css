@@ -144,7 +144,8 @@ h4 {
   -moz-transition: opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
 }
 .vg-popup {
-  background-color: #0e0f10;
+  color: #0f0f0f;
+  background-color: #fafafa;
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -338,12 +339,6 @@ footer {
 #home {
   height: 100%;
 }
-#home .left {
-  float: left;
-}
-#home .right {
-  float: left;
-}
 #home .container {
   overflow: inherit;
 }
@@ -354,7 +349,7 @@ footer {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  max-height: 800px;
+  height: 90vh;
   overflow: hidden;
   color: #fafafa;
 }
@@ -362,19 +357,24 @@ footer {
   height: 100%;
 }
 #home .one .svg-container {
+  float: left;
+  position: relative;
+  margin-top: 50%;
+  margin-left: 15%;
+  transform: translate(0, -50%);
   width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  z-index: 1;
 }
 @media only screen and (min-width: 960px) {
   #home .one .svg-container {
     width: 60%;
+    margin-left: 20%;
   }
 }
 #home .one svg {
   width: 100%;
   height: auto;
-  opacity: 0.5;
+  opacity: 0.4;
   /*@-webkit-keyframes move-image-borders {
 			  0%   { transform: translate(0% 0); }
 			  100% { transform: translate(100% 0); }
@@ -453,9 +453,10 @@ footer {
 			  100% { opacity: 1; }*/
 }
 #home .one .left {
+  float: left;
   overflow: hidden;
-  width: 60%;
-  height: 100%;
+  z-index: 2;
+  width: 100%;
 }
 #home .one .right {
   width: 40%;
@@ -563,17 +564,17 @@ footer {
   width: 400px;
   height: 100px;
   z-index: 1001;
-  background: -moz-linear-gradient(left, #5cc1af 0%, rgba(92, 193, 175, 0) 19%, rgba(92, 193, 175, 0) 100%);
+  background: -moz-linear-gradient(left, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #5cc1af), color-stop(19%, rgba(92, 193, 175, 0)), color-stop(100%, rgba(92, 193, 175, 0)));
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(92, 193, 175, 0)), color-stop(19%, #5cc1af), color-stop(100%, #5cc1af));
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, #5cc1af 0%, rgba(92, 193, 175, 0) 19%, rgba(92, 193, 175, 0) 100%);
+  background: -webkit-linear-gradient(left, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, #5cc1af 0%, rgba(92, 193, 175, 0) 19%, rgba(92, 193, 175, 0) 100%);
+  background: -o-linear-gradient(left, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, #5cc1af 0%, rgba(92, 193, 175, 0) 19%, rgba(92, 193, 175, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* IE10+ */
-  background: linear-gradient(to right, #5cc1af 0%, rgba(92, 193, 175, 0) 19%, rgba(92, 193, 175, 0) 100%);
+  background: linear-gradient(to right, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00131415', endColorstr='#131415', GradientType=1);
   /* IE6-9 */
@@ -608,7 +609,7 @@ footer {
 #login {
   padding-top: 10%;
   height: 100%;
-  background: url(../img/bg-3.png) no-repeat center center;
+  background: #5cc1af;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -692,7 +693,7 @@ footer {
 */
 #signup {
   height: 100%;
-  background: url(../img/bg-3.png) no-repeat center center;
+  background: #5cc1af;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -905,7 +906,7 @@ footer {
 	DASHBOARD PAGE
 */
 #dashboard {
-  background: url(../img/bg-3.png) no-repeat center center;
+  background: #5cc1af;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

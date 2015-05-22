@@ -114,7 +114,7 @@ body {
   font-size: 2.8rem;
 }
 .layout1 .show {
-  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 .layout1 .col {
   width: 25%;
@@ -124,9 +124,14 @@ body {
   float: left;
   height: 33.3%;
 }
-#fake-image {
+#created-by {
   z-index: 1000;
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
+  color: #fafafa;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 1.4rem;
+  padding: 5px;
+  border-radius: 5px;
 }

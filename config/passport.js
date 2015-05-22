@@ -55,18 +55,25 @@ module.exports = function(passport) {
 
             // if no user is found, return the message
             if (!user) {
-                req.flash('loginMessage', 'User not found')
+                req.flash('loginMessage', 'Wrong credentials')
                 return done(null, false); // req.flash is the way to set flashdata using connect-flash
             }
 
             // if the user is found but the password is wrong
             user.validPassword(password, function(result) {
                 if (!result) {
-                    req.flash('loginMessage', 'Oops! Wrong password.')
+                    req.flash('loginMessage', 'Wrong credentials')
                     return done(null, false); // create the loginMessage and save it to session as flashdata
                 }
-                else
-                    return done(null, user);
+                else {
+                    if (user.active) {
+                        return done(null, user);
+                    }
+                    else {
+                        req.flash('loginMessage', 'Sorry but your user is not activated. Please contact viktor@vigu.se to get access to the application.')
+                        return done(null, false); // create the loginMessage and save it to session as flashdata
+                    }
+                }
             })
         });
 

@@ -33,7 +33,7 @@ module.exports = {
 				email     : email.toLowerCase(),
 				salt      : salt,
 				password  : hash,
-				activated : true
+				activated : false
 			};
 			req.models.users.create(params, function(err, message) {
 				if(err) {

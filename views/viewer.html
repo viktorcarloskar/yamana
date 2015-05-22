@@ -157,12 +157,12 @@
 
 	function addImageToDiv(col, img) {
 		var div = document.getElementById('col' + col)
-		img.style.marginBottom = "-" + div.offsetWidth + "px"
+		img.style.marginTop = "-" + div.offsetWidth + "px"
 		div.insertBefore(img, div.firstChild)
 	}
 	function addTweetToDiv(col, tweet) {
 		var div = document.getElementById('col' + col)
-		tweet.style.marginBottom = "-" + 100 + "%"
+		tweet.style.marginTop = "-" + 100 + "%"
 		div.insertBefore(tweet, div.firstChild)
 	}
 
@@ -239,9 +239,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="fake-image">
-		DAS FAKE IMG
+	{{#if viewer.show_ad}}
+	<div id="created-by">
+		Created by @viktorcarloskar
 	</div>
+	{{/if}}
 	<div id="main" class="layout1">
 		<div class="col" id="col1"></div>
 		<div class="col" id="col2"></div>
