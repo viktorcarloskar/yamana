@@ -70,9 +70,9 @@ h4 {
   -moz-transform: translate(20px, 0);
   -ms-transform: translate(20px, 0);
   -o-transform: translate(20px, 0);
-  transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, transform 0.1s ease-in;
-  -webkit-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
-  -moz-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+  transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -webkit-transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), -webkit-transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -moz-transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), -moz-transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
 }
 #login-form .vg-popup:before {
   content: '';
@@ -80,7 +80,7 @@ h4 {
   height: 0px;
   border-style: solid;
   border-width: 0 0 23px 23px;
-  border-color: transparent transparent #0e0f10 transparent;
+  border-color: transparent transparent #fafafa transparent;
   position: absolute;
   top: -23px;
   right: 23px;
@@ -126,11 +126,18 @@ h4 {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
-  border: 1px solid #2d2d2d;
+  border: 3px solid #ededed;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+  -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -o-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+}
+#login-form .vg-tb:focus {
+  border: 3px solid #616161;
 }
 #login-form.active {
   opacity: 1;
@@ -139,9 +146,9 @@ h4 {
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
-  transition: opacity 0.1s ease-in, transform 0.1s ease-in;
-  -webkit-transition: opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
-  -moz-transition: opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+  transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
+  -webkit-transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), -webkit-transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
+  -moz-transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), -moz-transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
 }
 .vg-popup {
   color: #0f0f0f;
@@ -339,6 +346,12 @@ footer {
 #home {
   height: 100%;
 }
+#home .left {
+  float: left;
+}
+#home .right {
+  float: left;
+}
 #home .container {
   overflow: inherit;
 }
@@ -355,20 +368,26 @@ footer {
 }
 #home .one .container {
   height: 100%;
+  position: relative;
+}
+#home .one .container .info {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 #home .one .svg-container {
   float: left;
-  position: relative;
-  margin-top: 50%;
-  margin-left: 15%;
-  transform: translate(0, -50%);
-  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
   z-index: 1;
 }
 @media only screen and (min-width: 960px) {
   #home .one .svg-container {
     width: 60%;
-    margin-left: 20%;
   }
 }
 #home .one svg {
@@ -641,12 +660,19 @@ footer {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
-  border: 1px solid #2d2d2d;
+  border: 3px solid #ededed;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+  -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -o-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   padding-left: 40px;
+}
+#login #login-form-page .vg-tb:focus {
+  border: 3px solid #616161;
 }
 #login #login-form-page .vg-input-email-wrapper:before {
   font-family: 'FontAwesome';
@@ -705,14 +731,14 @@ footer {
 }
 #signup #signup-form #signup-dialog {
   width: 400px;
-  background-color: #131415;
+  background-color: #fafafa;
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
-  color: #fafafa;
+  color: #0f0f0f;
   margin-left: auto;
   margin-right: auto;
 }
@@ -734,12 +760,19 @@ footer {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
-  border: 1px solid #2d2d2d;
+  border: 3px solid #ededed;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+  -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+  -o-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   padding-left: 40px;
+}
+#signup #signup-form .vg-tb:focus {
+  border: 3px solid #616161;
 }
 #signup #signup-form .vg-input-username-wrapper:before {
   font-family: 'FontAwesome';

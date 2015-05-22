@@ -135,9 +135,9 @@ h4 {
 	visibility:hidden;
 	z-index: 1000;
 	.transform(translate(20px, 0));
-	transition: visibility 0s 0.1s linear , opacity 0.1s ease-in, transform 0.1s ease-in;
-	-webkit-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
-	-moz-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+	transition: visibility 0s 400ms cubic-bezier(.6,0,.4,.99) , opacity 400ms cubic-bezier(.6,0,.4,.99), transform 400ms cubic-bezier(.6,0,.4,.99);
+	-webkit-transition: visibility 0s 400ms cubic-bezier(.6,0,.4,.99), opacity 400ms cubic-bezier(.6,0,.4,.99), -webkit-transform 400ms cubic-bezier(.6,0,.4,.99);
+	-moz-transition: visibility 0s 400ms cubic-bezier(.6,0,.4,.99), opacity 400ms cubic-bezier(.6,0,.4,.99), -moz-transform 400ms cubic-bezier(.6,0,.4,.99);
 
 	.vg-popup:before {
 		content: '';
@@ -145,7 +145,7 @@ h4 {
 		height: 0px;
 		border-style: solid;
 		border-width: 0 0 23px 23px;
-		border-color: transparent transparent @color-darker-blue-div transparent;
+		border-color: transparent transparent @color-white transparent;
 		position: absolute;
 		top: -23px;
 		right: 23px;
@@ -169,9 +169,9 @@ h4 {
 	opacity: 1;
 	visibility:visible;
 	.transform(translate(0, 0));
-	transition: opacity 0.1s ease-in, transform 0.1s ease-in;
-	-webkit-transition: opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
-	-moz-transition: opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+	transition: opacity 0.1s cubic-bezier(.6,0,.4,.99), transform 0.1s cubic-bezier(.6,0,.4,.99);
+	-webkit-transition: opacity 0.1s cubic-bezier(.6,0,.4,.99), -webkit-transform 0.1s cubic-bezier(.6,0,.4,.99);
+	-moz-transition: opacity 0.1s cubic-bezier(.6,0,.4,.99), -moz-transform 0.1s cubic-bezier(.6,0,.4,.99);
 }
 .vg-popup {
 	color: @color-black;
@@ -374,10 +374,10 @@ footer {
 #home {
 	height: 100%;
     .left {
-    	//float: left;
+    	float: left;
     }
     .right {
-    	//float: left;
+    	float: left;
     }
 		.container {
 			overflow: inherit;
@@ -396,19 +396,25 @@ footer {
 		color: @color-white;
 		.container {
 			height: 100%;
+			position: relative;
+			.info {
+				position: absolute;
+				top: 20%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
 		}
 		.svg-container {
 			float: left;
-			position: relative;
-			margin-top: 50%;
-			margin-left: 15%;
-			transform: translate(0, -50%);
-			width: 70%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 50%;
 			z-index: 1;
 			//.center();
 			@media @desktop {
 				width: 60%;
-				margin-left: 20%;
 			}
 		}
 		svg {
@@ -699,8 +705,8 @@ footer {
 		padding-bottom: 30px;
 		#signup-dialog {
 			width: 400px;
-			.vg-popup(@color-blue-div);
-			color: @color-white;
+			.vg-popup(@color-white);
+			color: @color-black;
 			margin-left: auto;
 			margin-right: auto;
 		}
