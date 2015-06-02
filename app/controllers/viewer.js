@@ -118,6 +118,7 @@ module.exports = {
 							stream.on('error', function (error) {
 								console.log("DETECTED Twitter error: " + error)
 								//throw error
+								stream.destroy()
 							})
 						})
 					};

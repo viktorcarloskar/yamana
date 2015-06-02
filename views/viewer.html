@@ -159,13 +159,21 @@
 		var div = document.getElementById('col' + col)
 		img.style.marginTop = "-" + div.offsetWidth + "px"
 		div.insertBefore(img, div.firstChild)
+		clearCol(col);
 	}
 	function addTweetToDiv(col, tweet) {
 		var div = document.getElementById('col' + col)
 		tweet.style.marginTop = "-" + 100 + "%"
 		div.insertBefore(tweet, div.firstChild)
+		clearCol(col);
 	}
-
+	function clearCol(col) {
+		var div = document.getElementById('col' + col)
+		for (var i = 0; i < div.childNodes.length; i++) {
+			if (div.childNodes[i].offsetTop > (window.innerHeight + 800))
+				div.removeChild(div.childNodes[i])
+		};
+	}
 	function getCol() {
 		var col = (Math.floor(Math.random() * columns) + 1)
 		var i = 0;
@@ -191,20 +199,16 @@
 	}
 
 	function init() {
-			var fullscreenBtn = document.getElementById('full-screen');
-			var nofullscreenBtn = document.getElementById('hide-flash');
-			var fakeImageCreator = document.getElementById('fake-image');
-			fullscreenBtn.onclick = function() {
-				launchFullscreen(document.documentElement);
-				hideFlash();
-			}
-			nofullscreenBtn.onclick = function() {
-				hideFlash();
-			}
-			fakeImageCreator.onclick = function() {
-				addFakeImage();
-			}
-
+		var fullscreenBtn = document.getElementById('full-screen');
+		var nofullscreenBtn = document.getElementById('hide-flash');
+		var fakeImageCreator = document.getElementById('fake-image');
+		fullscreenBtn.onclick = function() {
+			launchFullscreen(document.documentElement);
+			hideFlash();
+		}
+		nofullscreenBtn.onclick = function() {
+			hideFlash();
+		}
 	}
 
 	function hideFlash() {
