@@ -2,7 +2,7 @@ var ig 		   = require('instagram-node-lib');
 var settings  = require('../../config/settings')
 var models    = require('../models/');
 var Hashids   = require('hashids'),
-	hashids     = new Hashids('mmmbophashhansonmmmbopanderzfavoriter', 10);
+	hashids     = new Hashids(settings.session.hash_id, 10);
 var moment    = require('moment');
 
 
