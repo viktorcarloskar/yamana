@@ -37,4 +37,4 @@ jspm_packages
 .node_repl_history
 
 #Settings file
-#config/settings.js
+config/settings.js
