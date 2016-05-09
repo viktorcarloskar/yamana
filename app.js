@@ -4,7 +4,7 @@ var pg        = require('pg');
 var orm 	    = require('orm');
 var passport  = require('passport');
 var flash     = require('connect-flash');
-var connect   = require('express/node_modules/connect')
+var connect   = require('connect')
 var cookie    = require('cookie')
 
 var app       = express();
