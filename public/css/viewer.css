@@ -41,7 +41,7 @@ body {
   float: left;
   padding: 20px;
   font-size: 3rem;
-  background-color: #fafafa;
+  background-color: #Fafafa;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -52,7 +52,7 @@ body {
   cursor: pointer;
   margin-top: 5%;
   float: left;
-  color: #fafafa;
+  color: #Fafafa;
   text-decoration: underline;
 }
 #flash.animated {
@@ -79,7 +79,7 @@ body {
   padding: 10px;
   width: 100%;
   background: #0f0f0f;
-  color: #fafafa;
+  color: #Fafafa;
   float: left;
   display: block;
   -webkit-transition: all 500ms ease-in-out;
@@ -129,7 +129,7 @@ body {
   position: fixed;
   bottom: 5px;
   right: 5px;
-  color: #fafafa;
+  color: #Fafafa;
   background: rgba(0, 0, 0, 0.5);
   font-size: 1.4rem;
   padding: 5px;

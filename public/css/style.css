@@ -80,7 +80,7 @@ h4 {
   height: 0px;
   border-style: solid;
   border-width: 0 0 23px 23px;
-  border-color: transparent transparent #fafafa transparent;
+  border-color: transparent transparent #FAFAFA transparent;
   position: absolute;
   top: -23px;
   right: 23px;
@@ -101,7 +101,7 @@ h4 {
   border-radius: 4px;
   padding: 14px;
   background-color: #59a553;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -152,7 +152,7 @@ h4 {
 }
 .vg-popup {
   color: #0f0f0f;
-  background-color: #fafafa;
+  background-color: #FAFAFA;
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -195,7 +195,7 @@ html {
 }
 body {
   color: #0f0f0f;
-  background-color: #fafafa;
+  background-color: #FAFAFA;
   font-family: "proxima_nova", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
@@ -278,7 +278,7 @@ header #menu > ul > li a {
   transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
 }
 header #menu > ul > li a:hover {
-  color: #fafafa;
+  color: #FAFAFA;
 }
 header #menu > ul i {
   margin-left: 14px;
@@ -364,7 +364,7 @@ footer {
   background-size: cover;
   height: 90vh;
   overflow: hidden;
-  color: #fafafa;
+  color: #FAFAFA;
 }
 #home .one .container {
   height: 100%;
@@ -638,7 +638,7 @@ footer {
   padding-top: 30px;
   padding-bottom: 30px;
   width: 400px;
-  color: #fafafa;
+  color: #FAFAFA;
   margin-left: auto;
   margin-right: auto;
 }
@@ -700,7 +700,7 @@ footer {
   border-radius: 4px;
   padding: 14px;
   background-color: #59a553;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -731,7 +731,7 @@ footer {
 }
 #signup #signup-form #signup-dialog {
   width: 400px;
-  background-color: #fafafa;
+  background-color: #FAFAFA;
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -821,7 +821,7 @@ footer {
   border-radius: 4px;
   padding: 14px;
   background-color: #59a553;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -849,7 +849,7 @@ footer {
   border-radius: 4px;
   padding: 14px;
   background-color: #db4437;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -865,7 +865,7 @@ footer {
 }
 #signup #signup-form .vg-btn-google-wrapper:before {
   font-family: 'FontAwesome';
-  color: #fafafa;
+  color: #FAFAFA;
   position: absolute;
   top: 18px;
   left: 14px;
@@ -873,7 +873,7 @@ footer {
 }
 #signup #signup-form .vg-btn-facebook-wrapper:before {
   font-family: 'FontAwesome';
-  color: #fafafa;
+  color: #FAFAFA;
   position: absolute;
   top: 18px;
   left: 14px;
@@ -881,7 +881,7 @@ footer {
 }
 #signup #signup-form .vg-btn-twitter-wrapper:before {
   font-family: 'FontAwesome';
-  color: #fafafa;
+  color: #FAFAFA;
   position: absolute;
   top: 18px;
   left: 14px;
@@ -897,7 +897,7 @@ footer {
   border-radius: 4px;
   padding: 14px;
   background-color: #3b5998;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -921,7 +921,7 @@ footer {
   border-radius: 4px;
   padding: 14px;
   background-color: #55acee;
-  color: #fafafa;
+  color: #FAFAFA;
   font-size: 1.2rem;
   cursor: pointer;
   display: block;
@@ -950,7 +950,7 @@ footer {
   box-sizing: border-box;
   width: 24%;
   float: left;
-  background: #fafafa;
+  background: #FAFAFA;
   margin-right: 1%;
   margin-bottom: 1%;
   -webkit-border-radius: 4px;
