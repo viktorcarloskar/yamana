@@ -17,7 +17,6 @@
     "instagram-node-lib": "0.1.*",
     "socket.io": "1.4.*",
     "pg.js": "2.11.1",
-    "pg": "*",
     "orm": "2.1.*",
     "hashids": "0.3.*",
     "moment": "2.5.*",
