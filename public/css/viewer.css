@@ -11,23 +11,17 @@ body {
   height: 100%;
   overflow: hidden;
 }
-<<<<<<< HEAD
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
-=======
->>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 #flash {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-<<<<<<< HEAD
   z-index: 1000;
-=======
->>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 #flash #controls {
   top: 20%;
@@ -73,7 +67,6 @@ body {
   overflow: hidden;
 }
 .layout1 .image {
-<<<<<<< HEAD
   width: 100%;
   float: left;
   display: block;
@@ -89,16 +82,11 @@ body {
   color: #fafafa;
   float: left;
   display: block;
-=======
-  position: absolute;
-  width: 25%;
->>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
   -ms-transition: all 500ms ease-in-out;
   -o-transition: all 500ms ease-in-out;
 }
-<<<<<<< HEAD
 .layout1 .tweet .profile {
   float: left;
   width: 100%;
@@ -131,25 +119,11 @@ body {
 .layout1 .col {
   width: 25%;
   float: left;
-=======
-.layout1 .col1 {
-  left: 0;
-}
-.layout1 .col2 {
-  left: 25%;
-}
-.layout1 .col3 {
-  left: 50%;
-}
-.layout1 .col4 {
-  left: 75%;
->>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 .layout2 .image {
   float: left;
   height: 33.3%;
 }
-<<<<<<< HEAD
 #created-by {
   z-index: 1000;
   position: fixed;
@@ -160,11 +134,4 @@ body {
   font-size: 1.4rem;
   padding: 5px;
   border-radius: 5px;
-=======
-#fake-image {
-  z-index: 1000;
-  position: fixed;
-  bottom: 0;
-  right: 0;
->>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
