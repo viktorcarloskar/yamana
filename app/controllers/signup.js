@@ -11,6 +11,7 @@ module.exports = {
 	// Function for registering new users
 	// Responds with http code 200 if succeeded
 	// Else redirects to /signup
+
 	registerUser: function(req, res, next) {
 		var name = req.body.user.name;
 		var email = req.body.user.email;
@@ -34,6 +35,7 @@ module.exports = {
 				salt      : salt,
 				password  : hash,
 				activated : false
+
 			};
 			req.models.users.create(params, function(err, message) {
 				if(err) {
@@ -62,6 +64,7 @@ module.exports = {
 		res.render('signup', {title: 'YAMANA - Instagram visualizer for the big screen'});
 	},
 	// Not in use
+
 	registerTwitter: function(req, res, next) {
 
 	}

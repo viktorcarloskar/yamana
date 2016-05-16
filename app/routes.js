@@ -59,7 +59,7 @@ module.exports = function(app, passport, server, io) {
 	app.get('/dashboard', isLoggedIn, controllers.viewer.userViewers);
 
 	// =================================
-	// CREATE NEW VIEWER 
+	// CREATE NEW VIEWER
 	// =================================
 	app.post('/dashboard/create', isLoggedIn, controllers.viewer.newViewer);
 
@@ -135,7 +135,7 @@ module.exports = function(app, passport, server, io) {
 			socket.on('disconnect', function() {
 				controllers.viewer.closedConn(socket);
 			});
-		} 
+		}
 		else
 			socket.disconnect();
 	});

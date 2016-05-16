@@ -4,8 +4,11 @@ var ig 		  = require('instagram-node-lib');
 var settings  = require('../../config/settings')
 var models    = require('../models/');
 var Hashids   = require('hashids'),
-	hashids   = new Hashids('mmmbophashhansonmmmbopanderzfavoriter', 10);
+	hashids     = new Hashids(settings.session.hash_id, 10);
 var moment    = require('moment');
+
+
+
 
 ig.set('client_id', settings.instagram.client_id);
 ig.set('client_secret', settings.instagram.client_secret);
@@ -16,7 +19,7 @@ var clients = [];
 
 module.exports = {
 
-	
+
 	// dashboard.html load function.
 	// Loads all the viewers for the logged in user
 	userViewers: function(req, res, next) {
@@ -39,7 +42,7 @@ module.exports = {
 	startSubscription: function(req, res, next) {
 
 	},
-	
+
 	// viewer.html init function
 	getViewer: function(req, res, next) {
 		var viewerId = hashids.decrypt(req.param('id'));
@@ -59,7 +62,7 @@ module.exports = {
 		})
 	},
 
-	
+
 	// On new websocket connection
 	newConn: function(socket) {
 		return true;
@@ -68,11 +71,11 @@ module.exports = {
 	// On websocket 'fetch' call
 	// Saves the socket connection, sends the latest instagram images and starts a subscription at instagram
 	init: function(socket, data) {
-		
+
 		// Handle if viewer has had images pushed before
 		var min_id_instagram;
-		
-		if (data.min_id_instagram) 
+
+		if (data.min_id_instagram)
 			min_id_instagram = data.min_id_instagram;
 		else
 			min_id_instagram = null;
@@ -143,7 +146,7 @@ module.exports = {
 			data.forEach(function(obj) {
 
 				var client;
-				
+
 				client = clients.filter(function(i) {
 					if (i.socket.id == socketId)
 						return i;
@@ -160,16 +163,16 @@ module.exports = {
 							setMinId(client, pagination);
 							res.send(200)
 						}
-						else 
+						else
 							res.send(201)
-					})	
+					})
 				}
 				else {
 					ig.subscriptions.unsubscribe({id: obj.subscription_id});
 					console.log('Unsubscribed subscription: ' + obj.id);
 					res.send(200)
 				}
-				
+
 				/*
 				console.log(tag);
 				// Async fix variables
@@ -250,6 +253,7 @@ function setHashtag(client, hashtag){
 }
 
 // Function that hashes all the ids of the viewers and sets the datetimes to more readable units
+
 function hashIds(viewers, callback) {
 	var res = []
 	var tasksToGo = viewers.length;
@@ -271,8 +275,8 @@ function hashIds(viewers, callback) {
 
 // Function for adding a new viewer
 function createViewer(req, res, viewer, callback) {
-	var insert = {}; 
-	
+	var insert = {};
+
 	// Validations
 	// Validating that hashtag var doesn't contain a #
 	if (viewer.hashtag.indexOf('#') === -1) {
@@ -287,7 +291,7 @@ function createViewer(req, res, viewer, callback) {
 			insert.hashtag = viewer.hashtag;
 			insert.user_id = user.id;
 			db.models.viewers.create(insert, function(err, results) {
-				if (err) 
+				if (err)
 					throw err;
 				console.log(results);
 				callback(err, result);

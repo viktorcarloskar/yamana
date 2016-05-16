@@ -13,12 +13,12 @@ module.exports = function(orm, db) {
         show_twitter  : Boolean,
         show_instagram: Boolean,
         show_ad       : Boolean
-    }, 
+    },
     {
         methods: {
             user: function () {
                 db.models.users.get(this.user_id, function(err, user) {
-                    if (err) 
+                    if (err)
                         throw err;
                     else
                         return user;

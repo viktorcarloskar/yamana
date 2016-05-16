@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* GULP IS COOL */
+=======
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 /* FONT IMPORT */
 @font-face {
   font-family: 'proxima_nova';
@@ -70,9 +73,15 @@ h4 {
   -moz-transform: translate(20px, 0);
   -ms-transform: translate(20px, 0);
   -o-transform: translate(20px, 0);
+<<<<<<< HEAD
   transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -webkit-transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), -webkit-transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -moz-transition: visibility 0s 400ms cubic-bezier(0.6, 0, 0.4, 0.99), opacity 400ms cubic-bezier(0.6, 0, 0.4, 0.99), -moz-transform 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
+=======
+  transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, transform 0.1s ease-in;
+  -webkit-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
+  -moz-transition: visibility 0s 0.1s linear, opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 #login-form .vg-popup:before {
   content: '';
@@ -80,7 +89,11 @@ h4 {
   height: 0px;
   border-style: solid;
   border-width: 0 0 23px 23px;
+<<<<<<< HEAD
   border-color: transparent transparent #fafafa transparent;
+=======
+  border-color: transparent transparent #0e0f10 transparent;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   position: absolute;
   top: -23px;
   right: 23px;
@@ -126,11 +139,16 @@ h4 {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
+<<<<<<< HEAD
   border: 3px solid #ededed;
+=======
+  border: 1px solid #2d2d2d;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+<<<<<<< HEAD
   -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
@@ -138,6 +156,8 @@ h4 {
 }
 #login-form .vg-tb:focus {
   border: 3px solid #616161;
+=======
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 #login-form.active {
   opacity: 1;
@@ -146,6 +166,7 @@ h4 {
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
+<<<<<<< HEAD
   transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
   -webkit-transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), -webkit-transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
   -moz-transition: opacity 0.1s cubic-bezier(0.6, 0, 0.4, 0.99), -moz-transform 0.1s cubic-bezier(0.6, 0, 0.4, 0.99);
@@ -153,6 +174,14 @@ h4 {
 .vg-popup {
   color: #0f0f0f;
   background-color: #fafafa;
+=======
+  transition: opacity 0.1s ease-in, transform 0.1s ease-in;
+  -webkit-transition: opacity 0.1s ease-in, -webkit-transform 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in, -moz-transform 0.1s ease-in;
+}
+.vg-popup {
+  background-color: #0e0f10;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -162,18 +191,34 @@ h4 {
 }
 ::-webkit-input-placeholder {
   /* WebKit browsers */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   color: #5f5f5f;
 }
 :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   color: #5f5f5f;
 }
 ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   color: #5f5f5f;
 }
 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   color: #5f5f5f;
 }
 body,
@@ -221,7 +266,11 @@ header {
   top: 0;
   height: 90px;
   font-family: "proxima_nova", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+<<<<<<< HEAD
   font-weight: normal;
+=======
+  font-weight: 100;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -260,6 +309,10 @@ header #menu > ul > li {
   padding-left: 20px;
   padding-right: 20px;
   font-size: 1.4rem;
+<<<<<<< HEAD
+=======
+  color: #fafafa;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   letter-spacing: 1.3px;
   -webkit-transition: background 200ms ease-in;
   -moz-transition: background 200ms ease-in;
@@ -269,6 +322,7 @@ header #menu > ul > li {
 }
 header #menu > ul > li a {
   cursor: pointer;
+<<<<<<< HEAD
   color: rgba(250, 250, 250, 0.5);
   text-decoration: none;
   -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
@@ -279,6 +333,13 @@ header #menu > ul > li a {
 }
 header #menu > ul > li a:hover {
   color: #fafafa;
+=======
+  color: #fafafa;
+  text-decoration: none;
+}
+header #menu > ul > li a:hover {
+  color: #7a7a7a;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 header #menu > ul i {
   margin-left: 14px;
@@ -357,17 +418,27 @@ footer {
 }
 #home .one {
   padding-top: 90px;
+<<<<<<< HEAD
   background: #5cc1af;
+=======
+  background: url(../img/bg-3.png) no-repeat center center;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+<<<<<<< HEAD
   height: 90vh;
+=======
+  padding: 35% 0 6% 0;
+  max-height: 800px;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   overflow: hidden;
   color: #fafafa;
 }
 #home .one .container {
   height: 100%;
+<<<<<<< HEAD
   position: relative;
 }
 #home .one .container .info {
@@ -476,11 +547,22 @@ footer {
   overflow: hidden;
   z-index: 2;
   width: 100%;
+=======
+}
+#home .one .left {
+  overflow: hidden;
+  width: 60%;
+  height: 100%;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 #home .one .right {
   width: 40%;
 }
 #home .two {
+<<<<<<< HEAD
+=======
+  background-color: #d7d7d7;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   padding-top: 5%;
   overflow: hidden;
 }
@@ -559,7 +641,11 @@ footer {
   position: fixed;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   background-color: #5cc1af;
+=======
+  background-color: #131415;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   z-index: 1000;
   opacity: 1;
   overflow: hidden;
@@ -583,6 +669,7 @@ footer {
   width: 400px;
   height: 100px;
   z-index: 1001;
+<<<<<<< HEAD
   background: -moz-linear-gradient(left, rgba(92, 193, 175, 0) 0%, #5cc1af 19%, #5cc1af 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(92, 193, 175, 0)), color-stop(19%, #5cc1af), color-stop(100%, #5cc1af));
@@ -597,6 +684,29 @@ footer {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00131415', endColorstr='#131415', GradientType=1);
   /* IE6-9 */
+=======
+  background: -moz-linear-gradient(left, rgba(19, 20, 21, 0) 0%, #131415 19%, #131415 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(19, 20, 21, 0)), color-stop(19%, #131415), color-stop(100%, #131415));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(left, rgba(19, 20, 21, 0) 0%, #131415 19%, #131415 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(left, rgba(19, 20, 21, 0) 0%, #131415 19%, #131415 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(left, rgba(19, 20, 21, 0) 0%, #131415 19%, #131415 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to right, rgba(19, 20, 21, 0) 0%, #131415 19%, #131415 100%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00131415', endColorstr='#131415', GradientType=1);
+  /* IE6-9 */
+
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 }
 #home #flash.animated {
   -webkit-transition: all 1s ease-in 1.5s;
@@ -628,7 +738,11 @@ footer {
 #login {
   padding-top: 10%;
   height: 100%;
+<<<<<<< HEAD
   background: #5cc1af;
+=======
+  background: url(../img/bg-3.png) no-repeat center center;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -660,11 +774,16 @@ footer {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
+<<<<<<< HEAD
   border: 3px solid #ededed;
+=======
+  border: 1px solid #2d2d2d;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+<<<<<<< HEAD
   -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
@@ -674,6 +793,10 @@ footer {
 #login #login-form-page .vg-tb:focus {
   border: 3px solid #616161;
 }
+=======
+  padding-left: 40px;
+}
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 #login #login-form-page .vg-input-email-wrapper:before {
   font-family: 'FontAwesome';
   color: #5f5f5f;
@@ -719,7 +842,11 @@ footer {
 */
 #signup {
   height: 100%;
+<<<<<<< HEAD
   background: #5cc1af;
+=======
+  background: url(../img/bg-3.png) no-repeat center center;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -731,14 +858,22 @@ footer {
 }
 #signup #signup-form #signup-dialog {
   width: 400px;
+<<<<<<< HEAD
   background-color: #fafafa;
+=======
+  background-color: #131415;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   padding: 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+<<<<<<< HEAD
   color: #0f0f0f;
+=======
+  color: #fafafa;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   margin-left: auto;
   margin-right: auto;
 }
@@ -760,11 +895,16 @@ footer {
   padding: 14px;
   font-size: 1.2rem;
   width: 100%;
+<<<<<<< HEAD
   border: 3px solid #ededed;
+=======
+  border: 1px solid #2d2d2d;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
+<<<<<<< HEAD
   -webkit-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -moz-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
   -ms-transition: all 400ms cubic-bezier(0.6, 0, 0.4, 0.99);
@@ -774,6 +914,10 @@ footer {
 #signup #signup-form .vg-tb:focus {
   border: 3px solid #616161;
 }
+=======
+  padding-left: 40px;
+}
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
 #signup #signup-form .vg-input-username-wrapper:before {
   font-family: 'FontAwesome';
   color: #5f5f5f;
@@ -939,7 +1083,11 @@ footer {
 	DASHBOARD PAGE
 */
 #dashboard {
+<<<<<<< HEAD
   background: #5cc1af;
+=======
+  background: url(../img/bg-3.png) no-repeat center center;
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -947,12 +1095,18 @@ footer {
   height: 100%;
 }
 #dashboard .viewer {
+<<<<<<< HEAD
   box-sizing: border-box;
+=======
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   width: 24%;
   float: left;
   background: #fafafa;
   margin-right: 1%;
+<<<<<<< HEAD
   margin-bottom: 1%;
+=======
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -984,6 +1138,7 @@ footer {
 #dashboard .viewer .text > .right .time {
   color: #0f0f0f;
 }
+<<<<<<< HEAD
 #dashboard .new_viewer {
   background: transparent;
   border: 4px solid #c0c0c0;
@@ -1008,3 +1163,5 @@ footer {
   height: 0;
   overflow: hidden;
 }
+=======
+>>>>>>> 862c122aad87d574d0a4f180b2babcf39ccecc30

@@ -49,6 +49,7 @@ function initHomeCircles() {
 		}
 	}
 }
+
 function initNewViewer() {
 	var newViewerForm = document.querySelectorAll('.new_viewer')[0];
 	// Open
